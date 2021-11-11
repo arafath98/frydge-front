@@ -1,1 +1,1 @@
-# frydge-front
+# frydge-frontend
