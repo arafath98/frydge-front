@@ -6,6 +6,8 @@ import Login from "./pages/Auth/Login";
 import NotFound from './pages/NotFound/NotFound';
 
 import './App.css';
+import Register from "./pages/Auth/Register";
+import Home from "./pages/Home/Home";
 
 function App() {
 
@@ -29,11 +31,12 @@ function App() {
     <div className="App">
       <Contex.Provider value={{ theme, setTheme, colours }} >
         <Routes>
+          <Route path="/" element={<Home />} />
 
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           <Route path="*" element={<NotFound />} />
-
         </Routes>
       </Contex.Provider>
     </div >
