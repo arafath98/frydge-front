@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../components/UI/Button";
@@ -14,11 +15,19 @@ export default function Register() {
     document.title = "Register";
 
     const { theme, colors } = useContext(Context);
+    const { isLoggedIn } = useContext(Context);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn)
+            navigate("/");
+    }, []);
 
     const fields = [
         { name: "username", type: "text", placeholder: "Username..", setState: setUsername, value: username },
@@ -81,22 +90,46 @@ export default function Register() {
             return;
         }
 
+        const data = {
+            username: username,
+            email: email,
+            password: password
+        }
+
         console.log("REGISTRATION");
+
+        fetch("http://127.0.0.1:8000/users/register/", {
+            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    navigate("/login");
+                }
+            });
     };
 
     return (
-        <Container className={styles.container}>
-            <h1 style={{ color: colors[theme].text }}>Register</h1>
+        <>
+            {
+                isLoggedIn ? <></> :
 
-            <form className={styles.form}>
-                {getInputRows(fields)}
+                    <Container className={styles.container}>
+                        <h1 style={{ color: colors[theme].text }}>Register</h1>
 
-                <Row className="justify-content-center">
-                    <Col xs={10} sm={10} md={8} lg={7} xl={6}>
-                        <Button className={styles.button} background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={register}>Register</Button>
-                    </Col>
-                </Row>
-            </form>
-        </Container>
+                        <form className={styles.form}>
+                            {getInputRows(fields)}
+
+                            <Row className="justify-content-center">
+                                <Col xs={10} sm={10} md={8} lg={7} xl={6}>
+                                    <Button className={styles.button} background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={register}>Register</Button>
+                                </Col>
+                            </Row>
+                        </form>
+                    </Container>
+            }
+        </>
     );
 };

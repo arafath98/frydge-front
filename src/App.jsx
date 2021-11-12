@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 function App() {
 
   const [theme, setTheme] = useState("dark");
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const colors = {
     dark: {
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <div className="App" style={{ backgroundColor: colors[theme].primary }}>
-      <Context.Provider value={{ theme, setTheme, colors }} >
+      <Context.Provider value={{ theme, setTheme, colors, isLoggedIn }} >
         <Routes>
           <Route path="/" element={<Home />} />
 
