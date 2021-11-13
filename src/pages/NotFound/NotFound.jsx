@@ -16,7 +16,6 @@ export default function NotFound() {
         navigate("/");
     }
 
-    console.log(colors[theme].contrast);
     return (
         <Container className="mt-2">
             <Row className="justify-content-center">

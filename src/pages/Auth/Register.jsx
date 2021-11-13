@@ -7,15 +7,14 @@ import Button from "../../components/UI/Button";
 import InputBox from "../../components/UI/InputBox";
 import { Context } from "../../Context";
 
-import styles from "./Register.module.css";
+import styles from "./Auth.module.css";
 
 
 export default function Register() {
 
     document.title = "Register";
 
-    const { theme, colors } = useContext(Context);
-    const { isLoggedIn } = useContext(Context);
+    const { theme, colors, isLoggedIn } = useContext(Context);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -30,10 +29,10 @@ export default function Register() {
     }, []);
 
     const fields = [
-        { name: "username", type: "text", placeholder: "Username..", setState: setUsername, value: username },
-        { name: "email", type: "text", placeholder: "Email..", setState: setEmail, value: email },
-        { name: "password", type: "password", placeholder: "Password..", setState: setPassword, value: password },
-        { name: "confirm-password", type: "password", placeholder: "Confirm password..", setState: setConfirmPassword, value: confirmPassword },
+        { name: "username", type: "text", placeholder: "Username..", setState: setUsername },
+        { name: "email", type: "text", placeholder: "Email..", setState: setEmail },
+        { name: "password", type: "password", placeholder: "Password..", setState: setPassword },
+        { name: "confirm-password", type: "password", placeholder: "Confirm password..", setState: setConfirmPassword },
     ];
 
     // This function receives the setState function retuned from the useState to update the current state of the input field
@@ -96,13 +95,13 @@ export default function Register() {
             password: password
         }
 
-        console.log("REGISTRATION");
-
-        fetch("http://127.0.0.1:8000/users/register/", {
+        const options = {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
             body: JSON.stringify(data)
-        })
+        };
+
+        fetch("http://127.0.0.1:8000/users/register/", options)
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
