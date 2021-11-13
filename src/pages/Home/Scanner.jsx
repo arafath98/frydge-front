@@ -7,8 +7,8 @@ function Scanner() {
   return (
     <>
       <BarcodeScannerComponent
-        width={500}
-        height={500}
+        width={"100%"}
+        height={"100%"}
         onUpdate={(err, result) => {
           if (result) setData(result.text);
           else setData("Not Found");

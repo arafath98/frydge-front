@@ -9,8 +9,7 @@ import './App.css';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import Scanner from "./pages/Home/Scanner";
-import Scanner2 from "./pages/Home/Scanner2";
-
+import Modal1 from "./pages/Home/Modal1"
 function App() {
 
   const [theme, setTheme] = useState("dark");
@@ -35,8 +34,8 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn }} >
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/scanner" element={<Scanner/>} />
-          <Route path="/scanner2" element={<Scanner2/>} />
+          <Route path="/scanner" element={<Scanner />} />
+          <Route path="/modal" element={<Modal1 />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
