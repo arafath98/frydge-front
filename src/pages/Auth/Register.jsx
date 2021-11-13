@@ -115,7 +115,7 @@ export default function Register() {
     return (
         <>
             {
-                isLoggedIn ? <></> :
+                // isLoggedIn ? <></> :
 
                     <Container className={styles.container}>
                         <h1 style={{ color: colors[theme].text }}>Register</h1>
