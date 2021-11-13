@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound/NotFound';
 import './App.css';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
+import Scanner from "./pages/Home/Scanner";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
       <Contex.Provider value={{ theme, setTheme, colours }} >
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/scanner" element={<Scanner/>} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
