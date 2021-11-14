@@ -18,7 +18,7 @@ export default function Login() {
 
     const [errorMessages, setErrorMessages] = useState([]);
 
-    const { theme, colors, isLoggedIn } = useContext(Context);
+    const { theme, colors, isLoggedIn, setIsLoggedIn } = useContext(Context);
 
     const navigate = useNavigate();
 
@@ -71,6 +71,7 @@ export default function Login() {
             .then(data => {
                 if (data.token) {
                     window.localStorage.setItem("token", data.token);
+                    setIsLoggedIn(true);
                     navigate("/");
                 }
 

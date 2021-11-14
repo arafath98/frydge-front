@@ -4,10 +4,11 @@ import { Context } from "./Context";
 
 import Login from "./pages/Auth/Login";
 import NotFound from './pages/NotFound/NotFound';
-
-import './App.css';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
+import NavBar from "./components/Nav/NavBar";
+
+import './App.css';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
   }
 
   const [theme, setTheme] = useState("dark");
-  const [isLoggedIn, setIsLoggedIn] = useState(validateToken);
+  const [isLoggedIn, setIsLoggedIn] = useState(validateToken());
 
   const colors = {
     dark: {
@@ -38,7 +39,8 @@ function App() {
 
   return (
     <div className="App" style={{ backgroundColor: colors[theme].primary, color: colors[theme].text }}>
-      <Context.Provider value={{ theme, setTheme, colors, isLoggedIn }} >
+      <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn }} >
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
 
