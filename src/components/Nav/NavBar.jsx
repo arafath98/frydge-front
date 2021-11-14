@@ -27,7 +27,7 @@ export default function NavBar() {
 
                 <div className={styles.links}>
                     {
-                        isLoggedIn == false && <>
+                        isLoggedIn === false && <>
                             <Link to="/login">Login</Link>
                             <Link to="/register">Register</Link>
                         </>

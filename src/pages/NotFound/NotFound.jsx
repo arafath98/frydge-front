@@ -19,7 +19,7 @@ export default function NotFound() {
     }
 
     return (
-        <Container className="mt-2">
+        <Container className="py-2">
             <Row className="justify-content-center">
                 <Col xs={12} sm={11} md={8} lg={6} xl={5}>
                     <img className={styles.logo} src={Logo} alt="404" />
