@@ -5,9 +5,8 @@ export default function Try() {
     const options = {
         method: 'GET',
         headers: {
-            "Authorization": "token " + token,
             'Content-Type': 'application/json',
-            "token": token
+            "token": token,
         }
     }
 
@@ -15,7 +14,7 @@ export default function Try() {
 
         console.log("Now fetching data...");
 
-        fetch("http://127.0.0.1:8000/items", options)
+        fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/", options)
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(err => console.error(err))
@@ -25,7 +24,6 @@ export default function Try() {
     return (
         <div>
             TRY PAGE
-
             <button onClick={fetchData}>FETCH THE DATA</button>
         </div>
     )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Context } from "./Context";
 
@@ -10,21 +10,23 @@ import NavBar from "./components/Nav/NavBar";
 import Try from "./pages/Try";
 
 import './App.css';
-import { data } from "./api/ItemsData";
 
 function App() {
 
+  const [itemsData, setItemsData] = useState([]);
+  const [username, setUsername] = useState("");
+
   const validateToken = () => {
     const token = window.localStorage.getItem("token");
-    if (token)
+    if (token) {
       return true;
+    }
 
     return false;
   }
 
   const [theme, setTheme] = useState("dark");
   const [isLoggedIn, setIsLoggedIn] = useState(validateToken());
-  const [itemsData, setItemsData] = useState(data);
 
   const colors = {
     dark: {
@@ -45,7 +47,9 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<h1>HOME</h1>} />
+
+          <Route path="/home" element={<Home />} />
 
           <Route path="/try" element={<Try />} />
 
