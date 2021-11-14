@@ -3,9 +3,10 @@ import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 function Scanner() {
   const [data, setData] = React.useState("Scanning... (Make sure the barcode is in focus");
-  const [fetched,setFetched] = React.useState('')
-
-
+  const [fetched,setFetched] = React.useState(false)
+  const [confirmed,setConfirmed] = React.useState(false)
+  const [date, setDate] = React.useState('')
+  const [complete, setComplete] = React.useState('')
   const onChange = (err, result) => {
 
     if (result) {
@@ -34,22 +35,53 @@ function Scanner() {
     e.preventDefault()
     let barcodeNo = e.target[0].value 
     let options = {
-      method:'GET',
-      mode:'cors',
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Headers": "*"
-      },
+      }
       // body: JSON.stringify('')
     }
 
-    let data = await fetch(`https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=229f1ted51mo159x702ym3b2txqg5l`, options)
+    let data = await fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=un14xjlrih7lnp1hirbmcg9cpjl0g1`)
     let jsondata = await data.json()
-    console.log(jsondata)
+    console.log(jsondata.products[0])
+    let object = jsondata.products[0]
+    const {title, description, images, stores} = object
+    setFetched(object)
+    console.log(typeof fetched)
+    console.log(typeof fetched === 'string')
+    // console.log(title,description,images[0],stores)
         // .then(resp => console.log(resp))
+
          
   }
+
+
+  const confirmedItem = (e) => {
+    e.preventDefault()
+    setFetched('')
+    setConfirmed(true)
+    console.log(fetched)
+  }
+
+
+  const deniedItem = (e) => {
+    e.preventDefault()
+    setFetched('')
+    document.getElementById('textbox').value = ''
+    console.log('denied!!!')
+  }
+
+  const datesubmit = (e) => {
+    e.preventDefault()
+    let date = document.getElementById('date').value
+    console.log(date)
+    setComplete(true)
+    setConfirmed(false)
+    setDate(date)
+  }
+
   return (
     <>
       {/* <BarcodeScannerComponent
@@ -63,11 +95,33 @@ function Scanner() {
         <input type="file" id="files" name="files" multiple />
         <br /><br /> */}
         <label for="files">Barcode No.</label>
-        <input type='text'/>
+        <input id='textbox' type='text'/>
         <input type="submit" />
       </form>
       <p>{data}</p>
-      <h1>Result:{fetched}</h1>
+      {fetched ? <> 
+      
+      <h1 className="text-light display-2">Is your product the : {fetched.title} </h1> 
+      <button className="btn btn-primary mx-5" onClick={confirmedItem}>Yes</button>
+      <button className="btn btn-danger" onClick={deniedItem}>No</button> </>
+      : <></>}
+
+
+      {confirmed ? 
+      <>
+      <h1 className="text-light display-2">Please enter the item's expiry date</h1>
+      <form onSubmit={datesubmit}>
+      <input id="date" type='date'/>
+      <input type="submit"/>
+      </form>
+
+
+      </>:<></>}
+
+      { complete ? <> <h1 className="text-light display-2">Would you like to add the item with:</h1><p>Name : {fetched.title}</p> <p>Expiry Date: {date}</p>  </>:<></>
+
+      }
+
     </>
   );
 
