@@ -16,7 +16,7 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const [errors, setErrors] = useState([]);
+    const [errorMessages, setErrorMessages] = useState([]);
 
     const { theme, colors, isLoggedIn } = useContext(Context);
 
@@ -74,7 +74,7 @@ export default function Login() {
                     navigate("/");
                 }
 
-                setErrors(["Invalid username or password"]);
+                setErrorMessages(["Invalid username or password"]);
             });
     }
 
@@ -86,7 +86,7 @@ export default function Login() {
                     <Container className={styles.container}>
                         <h1 style={{ color: colors[theme].text }}>Login</h1>
 
-                        {errors.length > 0 && errors.map(error =>
+                        {errorMessages.length > 0 && errorMessages.map(error =>
                             <h3 style={{ color: "red" }}>{error}</h3>
                         )}
 

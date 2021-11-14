@@ -20,6 +20,7 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessages, setErrorMessages] = useState([]);
 
     const navigate = useNavigate();
 
@@ -85,7 +86,7 @@ export default function Register() {
 
         const erros = validateFields();
         if (erros.length > 0) {
-            erros.map(field => console.log(field))
+            setErrorMessages(erros);
             return;
         }
 
@@ -117,6 +118,10 @@ export default function Register() {
 
                     <Container className={styles.container}>
                         <h1 style={{ color: colors[theme].text }}>Register</h1>
+
+                        {errorMessages.length > 0 && errorMessages.map(error =>
+                            <h3 style={{ color: "red" }}>{error}</h3>
+                        )}
 
                         <form className={styles.form}>
                             {getInputRows(fields)}

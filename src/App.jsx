@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Context } from "./Context";
 
@@ -11,8 +11,16 @@ import Home from "./pages/Home/Home";
 
 function App() {
 
+  const validateToken = () => {
+    const token = window.localStorage.getItem("token");
+    if (token)
+      return true;
+
+    return false;
+  }
+
   const [theme, setTheme] = useState("dark");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(validateToken);
 
   const colors = {
     dark: {
