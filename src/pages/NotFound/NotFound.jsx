@@ -9,6 +9,8 @@ import Logo from "./not-found2.svg";
 import styles from "./styles.module.css";
 
 export default function NotFound() {
+    document.title = "Not Found";
+
     const { theme, colors } = useContext(Context)
     const navigate = useNavigate();
 
