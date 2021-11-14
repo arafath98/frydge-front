@@ -24,7 +24,7 @@ export default function Login() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate("/");
+            navigate("/home");
         }
     }, []);
 
@@ -66,7 +66,7 @@ export default function Login() {
             body: JSON.stringify(data)
         };
 
-        fetch("http://127.0.0.1:8000/users/login/", options)
+        fetch("https://frydgeapp.herokuapp.com/users/login/", options)
             .then(response => response.json())
             .then(data => {
                 if (data.token) {

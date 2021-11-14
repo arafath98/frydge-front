@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Container } from 'react-bootstrap';
@@ -27,7 +27,7 @@ export default function NavBar() {
 
                 <div className={styles.links}>
                     {
-                        isLoggedIn == false && <>
+                        isLoggedIn === false && <>
                             <Link to="/login">Login</Link>
                             <Link to="/register">Register</Link>
                         </>
