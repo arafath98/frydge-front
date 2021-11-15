@@ -4,16 +4,31 @@ import { Context } from "./Context";
 
 import Login from "./pages/Auth/Login";
 import NotFound from './pages/NotFound/NotFound';
-
-import './App.css';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import Scanner from "./pages/Home/Scanner";
 import Modal1 from "./pages/Home/Modal1"
+import NavBar from "./components/Nav/NavBar";
+import Try from "./pages/Try";
+
+import './App.css';
+
 function App() {
 
+  const [itemsData, setItemsData] = useState([]);
+  const [username, setUsername] = useState("");
+
+  const validateToken = () => {
+    const token = window.localStorage.getItem("token");
+    if (token) {
+      return true;
+    }
+
+    return false;
+  }
+
   const [theme, setTheme] = useState("dark");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(validateToken());
 
   const colors = {
     dark: {
@@ -30,12 +45,15 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ backgroundColor: colors[theme].primary }}>
-      <Context.Provider value={{ theme, setTheme, colors, isLoggedIn }} >
+    <div className="App" style={{ backgroundColor: colors[theme].primary, color: colors[theme].text }}>
+      <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/scanner" element={<Scanner />} />
           <Route path="/modal" element={<Modal1 />} />
+
+          <Route path="/try" element={<Try />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
