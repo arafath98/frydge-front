@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import Scanner from "./pages/Home/Scanner";
+import NavBar from "./components/Nav/NavBar"
 
 function App() {
 

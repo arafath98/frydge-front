@@ -9,36 +9,14 @@ function Scanner() {
   const [date, setDate] = React.useState('')
   const [complete, setComplete] = React.useState('')
   const [scanned, setScanned] = React.useState(false)
-  const [item, setItem] = React.useState({})
+  const [item1, setItem1] = React.useState({})
+  const [item2,setItem2] = React.useState({})
 
   const onChange = (err, result) => {
-    console.log(result)
-
+    
     if (result) {
       setData({ text: result.text })
-
-
-      console.log(result.text)
-
-      // let object = jsondata.products[0]
-
-
-
     }
-    // else {
-    //   setData("Scanning... (Make sure the barcode is in focus");
-    //   console.log(data)
-    // }
-
-
-
-    // if (result.text == data) {
-
-
-
-
-
-
   }
 
   // useDidMountEffect(() => {
@@ -46,55 +24,27 @@ function Scanner() {
   // }, [data])
 
   useDidMountEffect(() => {
-    console.log(data.text)
-
     let barcodeNo = data.text
-    setItem({ barcode: barcodeNo })
-
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=yrgd17bvjjj9icsxod0zj48cz21qsj`)
-      .then(resp => resp.json())
+    .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
-      .catch(resp => console.log('fetch failed'))
-    const { title, description, images, stores } = fetched
-    // setItem({...item,name:title,image:images[0]})
-    setScanned(true)
-    console.log(`scanned:${scanned}`)
-    // document.getElementById('barcodecam').stopStream = true
-    console.log(item)
-    // console.log(fetched)
+
+    .catch(resp => console.log('fetch failed'))
+    // const { title, images, stores } = fetched
+    
   }, [data.text])
   // barcode, name, expiry, image
 
 
 useDidMountEffect(() => {
+    console.log(fetched)
+    setItem1({ barcode: fetched.barcode_number , name: fetched.title , image:fetched.images[0]})
+    setScanned(true)
+    console.log(`scanned:${scanned}`)
+    // document.getElementById('barcodecam').stopStream = true
+    // console.log(fetched)
 
-},[item])
-  // const onsubmit = async (e) => {
-  //   e.preventDefault()
-  //   let barcodeNo = e.target[0].value
-  //   let options = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Access-Control-Allow-Origin": "http://localhost:3000",
-  //       "Access-Control-Allow-Headers": "*"
-  //     }
-  //     // body: JSON.stringify('')
-  //   }
-
-  //   let data = await fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=xezbr8zzwa1rv9v2qndy287dcgr37j`)
-  //   let jsondata = await data.json()
-  //   console.log(jsondata.products[0])
-  //   let object = jsondata.products[0]
-  //   const { title, description, images, stores } = object
-  //   setFetched(object)
-  //   console.log(typeof fetched)
-  //   console.log(typeof fetched === 'string')
-  //   // console.log(title,description,images[0],stores)
-  //   // .then(resp => console.log(resp))
-
-
-  // }
-
+},[fetched])
 
   const confirmedItem = (e) => {
     e.preventDefault()
@@ -116,18 +66,31 @@ useDidMountEffect(() => {
     setComplete(true)
     setIsItem(false)
     setDate(date)
+    
+    setItem2({...item1,expiry:date})
 
-    let options = {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        // "Access-Control-Allow-Origin": "http://localhost:3000",
-        // "Access-Control-Allow-Headers": "*"
-      },
-      body: JSON.stringify()
-    }
-    // fetch(``,options)
+    
   }
+
+  useDidMountEffect(() => {
+   console.log(item2)
+
+   const token = window.localStorage.getItem("token");
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "token": token,
+            },
+            body:JSON.stringify(item2)
+        }
+
+      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`,options)
+      .then(resp => resp.json())
+      .then(resp => console.log(resp))
+
+},[item2])
 
   return (
     <>
@@ -143,12 +106,12 @@ useDidMountEffect(() => {
   />
     </>
 }
-{ isItem ? <></>:<><form onSubmit={onsubmit} id="form">
+{/* { isItem ? <></>:<><form onSubmit={onsubmit} id="form">
         <input id='textbox' type='text'/>
         <input type="submit" />
       </form></>
       
-}
+} */}
 
       <p className="text-light display-4">{data.text}</p>
 
