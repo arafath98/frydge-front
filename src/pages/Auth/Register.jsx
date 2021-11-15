@@ -24,10 +24,11 @@ export default function Register() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isLoggedIn)
-            navigate("/");
-    }, []);
+    // useEffect(() => {
+        
+    //     if (isLoggedIn)
+    //         navigate("/");
+    // }, []);
 
     const fields = [
         { name: "username", type: "text", placeholder: "Username..", setState: setUsername },
@@ -114,7 +115,7 @@ export default function Register() {
     return (
         <>
             {
-                isLoggedIn ? <></> :
+                // isLoggedIn ? <></> :
 
                     <Container className={styles.container}>
                         <h1 style={{ color: colors[theme].text }}>Register</h1>
