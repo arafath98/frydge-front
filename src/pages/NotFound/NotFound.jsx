@@ -9,6 +9,8 @@ import Logo from "./not-found2.svg";
 import styles from "./styles.module.css";
 
 export default function NotFound() {
+    document.title = "Not Found";
+
     const { theme, colors } = useContext(Context)
     const navigate = useNavigate();
 
@@ -16,9 +18,8 @@ export default function NotFound() {
         navigate("/");
     }
 
-    console.log(colors[theme].contrast);
     return (
-        <Container className="mt-2">
+        <Container className="py-2">
             <Row className="justify-content-center">
                 <Col xs={12} sm={11} md={8} lg={6} xl={5}>
                     <img className={styles.logo} src={Logo} alt="404" />

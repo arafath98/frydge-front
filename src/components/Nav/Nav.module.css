@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.title {
+    font-size: 27px;
+}
+
+.links {
+    display: flex;
+}
+
+.links a {
+    padding: 0px 7px;
+    text-decoration: none;
+}

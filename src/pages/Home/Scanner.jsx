@@ -1,27 +1,27 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 
 function Scanner() {
-  const [data, setData] = React.useState({text:"Scanning... (Make sure the barcode is in focus"});
+  const [data, setData] = React.useState({ text: "Scanning... (Make sure the barcode is in focus" });
   const [fetched, setFetched] = React.useState(false)
   const [isItem, setIsItem] = React.useState(false)
   const [date, setDate] = React.useState('')
   const [complete, setComplete] = React.useState('')
   const [scanned, setScanned] = React.useState(false)
   const [item, setItem] = React.useState({})
-  
+
   const onChange = (err, result) => {
     console.log(result)
 
     if (result) {
-      setData({text:result.text})
+      setData({ text: result.text })
 
 
       console.log(result.text)
-      
+
       // let object = jsondata.products[0]
-      
+
 
 
     }
@@ -47,9 +47,9 @@ function Scanner() {
 
   useDidMountEffect(() => {
     console.log(data.text)
-    
+
     let barcodeNo = data.text
-    setItem({barcode:barcodeNo})
+    setItem({ barcode: barcodeNo })
 
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=yrgd17bvjjj9icsxod0zj48cz21qsj`)
       .then(resp => resp.json())
@@ -63,7 +63,7 @@ function Scanner() {
     console.log(item)
     // console.log(fetched)
   }, [data.text])
-// barcode, name, expiry, image
+  // barcode, name, expiry, image
 
 
 useDidMountEffect(() => {
@@ -116,9 +116,9 @@ useDidMountEffect(() => {
     setComplete(true)
     setIsItem(false)
     setDate(date)
-    
+
     let options = {
-      method:'POST',
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
         // "Access-Control-Allow-Origin": "http://localhost:3000",
