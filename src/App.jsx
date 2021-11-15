@@ -9,7 +9,7 @@ import './App.css';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import Scanner from "./pages/Home/Scanner";
-import Scanner2 from "./pages/Home/Scanner2";
+
 
 function App() {
 

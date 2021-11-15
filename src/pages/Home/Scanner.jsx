@@ -5,7 +5,7 @@ import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 function Scanner() {
   const [data, setData] = React.useState({text:"Scanning... (Make sure the barcode is in focus"});
   const [fetched, setFetched] = React.useState(false)
-  const [confirmed, setConfirmed] = React.useState(false)
+  const [isItem, setIsItem] = React.useState(false)
   const [date, setDate] = React.useState('')
   const [complete, setComplete] = React.useState('')
   const [scanned, setScanned] = React.useState(false)
@@ -51,12 +51,12 @@ function Scanner() {
     let barcodeNo = data.text
     setItem({barcode:barcodeNo})
 
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=xezbr8zzwa1rv9v2qndy287dcgr37j`)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=yrgd17bvjjj9icsxod0zj48cz21qsj`)
       .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
       .catch(resp => console.log('fetch failed'))
     const { title, description, images, stores } = fetched
-    setItem({...item,name:title,image:images[0]})
+    // setItem({...item,name:title,image:images[0]})
     setScanned(true)
     console.log(`scanned:${scanned}`)
     // document.getElementById('barcodecam').stopStream = true
@@ -65,6 +65,10 @@ function Scanner() {
   }, [data.text])
 // barcode, name, expiry, image
 
+
+useDidMountEffect(() => {
+
+},[item])
   // const onsubmit = async (e) => {
   //   e.preventDefault()
   //   let barcodeNo = e.target[0].value
@@ -94,7 +98,7 @@ function Scanner() {
 
   const confirmedItem = (e) => {
     e.preventDefault()
-    setConfirmed(true)
+    setIsItem(true)
     console.log(fetched)
   }
 
@@ -110,7 +114,7 @@ function Scanner() {
     let date = document.getElementById('date').value
     console.log(date)
     setComplete(true)
-    setConfirmed(false)
+    setIsItem(false)
     setDate(date)
     
     let options = {
@@ -139,15 +143,12 @@ function Scanner() {
   />
     </>
 }
-      {/* <form onSubmit={onsubmit} id="form">
-         <label for="files">Select files:</label>
-        <input type="file" id="files" name="files" multiple />
-        <br /><br />
-        <label for="files">Barcode No.</label>
+{ isItem ? <></>:<><form onSubmit={onsubmit} id="form">
         <input id='textbox' type='text'/>
         <input type="submit" />
-      </form> */}
-
+      </form></>
+      
+}
 
       <p className="text-light display-4">{data.text}</p>
 
@@ -159,7 +160,7 @@ function Scanner() {
         : <></>}
 
 
-      {confirmed ?
+      {isItem ?
         <>
           <h1 className="text-light display-2">Please enter the item's expiry date</h1>
           <form onSubmit={itemSubmission}>
