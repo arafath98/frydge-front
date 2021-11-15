@@ -43,7 +43,7 @@ function Scanner() {
       // body: JSON.stringify('')
     }
 
-    let data = await fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=un14xjlrih7lnp1hirbmcg9cpjl0g1`)
+    let data = await fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=xezbr8zzwa1rv9v2qndy287dcgr37j`)
     let jsondata = await data.json()
     console.log(jsondata.products[0])
     let object = jsondata.products[0]
@@ -84,11 +84,11 @@ function Scanner() {
 
   return (
     <>
-      {/* <BarcodeScannerComponent
+      <BarcodeScannerComponent
         width={500}
         height={500}
         onUpdate={onChange}
-      /> */}
+      />
 
       <form onSubmit={onsubmit} id="form">
         {/* <label for="files">Select files:</label>
@@ -114,7 +114,7 @@ function Scanner() {
       <input id="date" type='date'/>
       <input type="submit"/>
       </form>
-
+     
 
       </>:<></>}
 
