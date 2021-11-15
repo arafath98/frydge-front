@@ -51,10 +51,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/scanner" element={<Scanner />} />
-          <Route path="/modal" element={<Modal1 />} />
-
-          <Route path="/try" element={<Try />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
