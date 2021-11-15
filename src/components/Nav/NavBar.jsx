@@ -13,7 +13,7 @@ export default function NavBar() {
 
     const navigate = useNavigate();
 
-    const logOut = (e) => {
+    const logout = (e) => {
         e.preventDefault();
         window.localStorage.removeItem("token");
         setIsLoggedIn(false);
@@ -34,7 +34,11 @@ export default function NavBar() {
                     }
 
                     {
-                        isLoggedIn && <Link to="/" onClick={logOut}>Logout</Link>
+                        isLoggedIn && <>
+                            <Link to="/home">Home</Link>
+                            <Link to="/profile">Profile</Link>
+                            <Link to="/" onClick={logout}>Logout</Link>
+                        </>
                     }
                 </div>
             </Container>

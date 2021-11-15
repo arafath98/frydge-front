@@ -48,7 +48,7 @@ export default function AddEmail(props) {
             </Row>
             <Row className="justify-content-center">
                 <Col xs={10} sm={10} md={8} lg={7} xl={6}>
-                    <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={sendEmail}>Add Email</Button>
+                    <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={sendEmail}>Add Email for notification</Button>
                 </Col>
             </Row>
         </Container>
