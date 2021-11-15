@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-import { getItemsFromApi } from "../../api/ItemsData";
 import Item from "../../components/Item/Item";
 import { Context } from "../../Context";
 
