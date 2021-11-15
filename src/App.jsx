@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import NavBar from "./components/Nav/NavBar";
-import Try from "./pages/Try";
+import Profile from "./pages/Profile/Profile";
 
 import './App.css';
 
@@ -51,7 +51,7 @@ function App() {
 
           <Route path="/home" element={<Home />} />
 
-          <Route path="/try" element={<Try />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

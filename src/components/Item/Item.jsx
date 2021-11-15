@@ -12,13 +12,35 @@ import styles from "./Item.module.css";
 
 export default function Item(props) {
 
-    const { theme, colors, setItemsData } = useContext(Context);
+    const { theme, colors, setItemsData, itemsData } = useContext(Context);
 
     const deleteItemHandler = (id) => {
         console.log("Clicked element with id " + id);
-        setItemsData((previousData) => {
-            return previousData.filter(data => data.id !== id);
-        });
+        // const item = itemsData.filter(item => item.id === id);
+        // const itemName = item[0].name;
+
+        const token = window.localStorage.getItem("token");
+
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "token": token,
+            },
+            body: JSON.stringify({ id })
+        }
+
+        fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/delete/", options)
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Item not found.")
+                    return
+                console.log(data);
+                setItemsData((previousData) => {
+                    return previousData.filter(data => data.id !== id);
+                });
+            })
+            .catch(err => err)
     };
 
     return (
