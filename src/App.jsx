@@ -10,6 +10,7 @@ import NavBar from "./components/Nav/NavBar";
 import Profile from "./pages/Profile/Profile";
 
 import './App.css';
+import Scanner from "./pages/Home/Scanner";
 
 function App() {
 
@@ -53,12 +54,14 @@ function App() {
 
           <Route path="/profile" element={<Profile />} />
 
+          <Route path="/scanner" element={<Scanner />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Context.Provider>
+        </Routes >
+      </Context.Provider >
     </div >
   );
 }
