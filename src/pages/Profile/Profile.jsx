@@ -10,15 +10,13 @@ export default function Profile() {
     // const { colors, theme } = useContext(Context);
 
     const addEmail = (email) => {
-        console.log("This email has been sent to " + email);
+        console.log(`${email} has been successfully added.`);
         // API CALL TO SEND EMAILS
     };
 
     return (
         <div>
             Profile
-
-
             <AddEmail addEmail={addEmail} />
         </div>
     );

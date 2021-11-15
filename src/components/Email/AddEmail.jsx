@@ -25,6 +25,38 @@ export default function AddEmail(props) {
     const sendEmail = () => {
         if (validateEmail(email)) {
             props.addEmail(email);
+            const data = { email: email }
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': window.localStorage.getItem('token')
+                },
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+            }
+            fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/email/", options)
+                .then(resp => resp.json())
+                .then(data => console.log(data))
+            return;
+        }
+
+        setIsValidEmail(false);
+    }
+
+    const delEmail = () => {
+        if (validateEmail(email)) {
+            const data = { email: email }
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': window.localStorage.getItem('token')
+                },
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+            }
+            fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/email/", options)
+                .then(resp => resp.json())
+                .then(data => console.log(data))
             return;
         }
 
@@ -49,6 +81,11 @@ export default function AddEmail(props) {
             <Row className="justify-content-center">
                 <Col xs={10} sm={10} md={8} lg={7} xl={6}>
                     <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={sendEmail}>Add Email for notification</Button>
+                </Col>
+            </Row>
+            <Row className="justify-content-center mt-2">
+                <Col xs={10} sm={10} md={8} lg={7} xl={6}>
+                    <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={delEmail}>Delete Email</Button>
                 </Col>
             </Row>
         </Container>
