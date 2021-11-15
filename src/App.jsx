@@ -8,6 +8,7 @@ import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import Scanner from "./pages/Home/Scanner";
 import NavBar from "./components/Nav/NavBar"
+import Modal1 from "./pages/Home/Modal1"
 
 function App() {
 
@@ -46,10 +47,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/scanner" element={<Scanner />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Context.Provider>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
+import { useNavigate } from "react-router-dom";
 
 function Scanner() {
   const [data, setData] = React.useState({ text: "Scanning... (Make sure the barcode is in focus" });
@@ -9,8 +10,20 @@ function Scanner() {
   const [date, setDate] = React.useState('')
   const [complete, setComplete] = React.useState('')
   const [scanned, setScanned] = React.useState(false)
+  const [showDateInput,setShowDateInput] = React.useState(false)
   const [item1, setItem1] = React.useState({})
   const [item2,setItem2] = React.useState({})
+  const [check,setCheck] = React.useState(false)
+
+
+
+
+
+  const navigate = useNavigate();
+
+
+
+
 
   const onChange = (err, result) => {
     
@@ -25,11 +38,11 @@ function Scanner() {
 
   useDidMountEffect(() => {
     let barcodeNo = data.text
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=yrgd17bvjjj9icsxod0zj48cz21qsj`)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=https://api.barcodelookup.com/v3/products?barcode=9780140157376&formatted=y&key=zmfivgzyd1ojblmt39ilbbctxizd9j`)
     .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
-
     .catch(resp => console.log('fetch failed'))
+    
     // const { title, images, stores } = fetched
     
   }, [data.text])
@@ -38,17 +51,17 @@ function Scanner() {
 
 useDidMountEffect(() => {
     console.log(fetched)
+    setCheck(fetched)
     setItem1({ barcode: fetched.barcode_number , name: fetched.title , image:fetched.images[0]})
     setScanned(true)
-    console.log(`scanned:${scanned}`)
-    // document.getElementById('barcodecam').stopStream = true
-    // console.log(fetched)
+    
 
 },[fetched])
 
   const confirmedItem = (e) => {
     e.preventDefault()
-    setIsItem(true)
+    setShowDateInput(true)
+    setCheck(false)
     console.log(fetched)
   }
 
@@ -56,6 +69,7 @@ useDidMountEffect(() => {
   const deniedItem = (e) => {
     e.preventDefault()
     document.getElementById('textbox').value = ''
+    setIsItem(false)
     console.log('denied!!!')
   }
 
@@ -66,7 +80,7 @@ useDidMountEffect(() => {
     setComplete(true)
     setIsItem(false)
     setDate(date)
-    
+    setShowDateInput(false)
     setItem2({...item1,expiry:date})
 
     
@@ -99,33 +113,35 @@ useDidMountEffect(() => {
     :
     <>
     <BarcodeScannerComponent
-    width={500}
-    height={500}
+    width={'100%'}
+    height={'100%'}
     onUpdate={onChange}
     delay={100}
   />
+  <p className="text-dark display-4">{data.text}</p>
     </>
+    
 }
-{/* { isItem ? <></>:<><form onSubmit={onsubmit} id="form">
+{ isItem ? <></>:<><form onSubmit={onsubmit} id="form">
         <input id='textbox' type='text'/>
         <input type="submit" />
       </form></>
       
-} */}
+}
 
-      <p className="text-light display-4">{data.text}</p>
+      
 
-      {fetched ? <>
+      {check ? <>
 
-        <h1 className="text-light display-2">Is your product the : {fetched.title} </h1>
+        <h1 className="text-dark display-2">Is your product the : {fetched.title} </h1>
         <button className="btn btn-primary mx-5" onClick={confirmedItem}>Yes</button>
         <button className="btn btn-danger" onClick={deniedItem}>No</button> </>
         : <></>}
 
 
-      {isItem ?
+      {showDateInput ?
         <>
-          <h1 className="text-light display-2">Please enter the item's expiry date</h1>
+          <h1 className="text-dark display-2">Please enter the item's expiry date</h1>
           <form onSubmit={itemSubmission}>
             <input id="date" type='date' />
             <input type="submit" />
@@ -134,9 +150,7 @@ useDidMountEffect(() => {
 
         </> : <></>}
 
-      {complete ? <> <h1 className="text-light display-2">Would you like to add the item with:</h1><p className="text-light display-2">Name : {fetched.title}</p> <p className="text-light display-2">Expiry Date: {date}</p>  </> : <></>
-
-      }
+      {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
 
     </>
   );
