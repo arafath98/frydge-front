@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-
+import { Alert, Snackbar } from "@mui/material"
 import { Container, Row, Col } from "react-bootstrap";
 import InputBox from "../UI/InputBox";
 import Button from "../UI/Button";
@@ -10,6 +10,17 @@ export default function AddEmail(props) {
     const { theme, colors } = useContext(Context);
     const [email, setEmail] = useState("");
     const [isValidEmail, setIsValidEmail] = useState(true);
+    const [message, setmessage] = useState("")
+    const [open, setOpen] = useState(false)
+    const [messageType, setMessageType] = useState("")
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        setOpen(false)
+    }
 
     const validateEmail = (email) => {
         // PATTERN FROM STACKOVERFLOW
@@ -36,7 +47,19 @@ export default function AddEmail(props) {
             }
             fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/email/", options)
                 .then(resp => resp.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setOpen(true)
+                    setmessage(data.message)
+                    if (data.message == "This email already exists.") {
+                        setMessageType("error")
+                    }
+                    else {
+                        setMessageType("success")
+                    }
+                })
+                .catch(err => {
+                    return err
+                })
             return;
         }
 
@@ -56,7 +79,20 @@ export default function AddEmail(props) {
             }
             fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/email/", options)
                 .then(resp => resp.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setOpen(true)
+                    setmessage(data.message)
+                    if (data.message == "Could not find email you were looking for.") {
+                        setMessageType("error")
+                    }
+                    else {
+                        setMessageType("success")
+                    }
+
+                })
+                .catch(err => {
+                    return err
+                })
             return;
         }
 
@@ -88,6 +124,11 @@ export default function AddEmail(props) {
                     <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={delEmail}>Delete Email</Button>
                 </Col>
             </Row>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert aria-label="popup" onClose={handleClose} severity={messageType} sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
         </Container>
     );
 };
