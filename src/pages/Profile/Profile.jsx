@@ -22,7 +22,6 @@ export default function Profile() {
 
     return (
         <div>
-            Profile
             <AddEmail addEmail={addEmail} />
         </div>
     );
