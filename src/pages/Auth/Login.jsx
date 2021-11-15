@@ -72,7 +72,7 @@ export default function Login() {
                 if (data.token) {
                     window.localStorage.setItem("token", data.token);
                     setIsLoggedIn(true);
-                    navigate("/");
+                    navigate("/home");
                 }
 
                 setErrorMessages(["Invalid username or password"]);
