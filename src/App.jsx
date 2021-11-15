@@ -10,6 +10,7 @@ import NavBar from "./components/Nav/NavBar";
 import Try from "./pages/Try";
 
 import './App.css';
+import ShoppingList from "./pages/ShoppingList/ShoppingList";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path ="list" element={<ShoppingList/>} /> 
 
           <Route path="*" element={<NotFound />} />
         </Routes>

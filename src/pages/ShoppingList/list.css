@@ -1,0 +1,9 @@
+.crossed {
+    text-decoration: line-through;
+}
+
+.item-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
