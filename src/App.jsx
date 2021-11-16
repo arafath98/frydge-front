@@ -11,6 +11,7 @@ import Profile from "./pages/Profile/Profile";
 
 import './App.css';
 import Scanner from "./pages/Home/Scanner";
+import Landing from "./pages/Landing/Landing";
 
 function App() {
 
@@ -48,7 +49,7 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
-          <Route path="/" element={<h1>HOME</h1>} />
+          <Route path="/" element={<Landing />} />
 
           <Route path="/home" element={<Home />} />
 
