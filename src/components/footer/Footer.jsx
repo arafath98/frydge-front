@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Footer.css"
 import { useNavigate } from "react-router-dom"
+import Modal1 from '../../pages/Home/Modal1'
 
 export default function Footer() {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ export default function Footer() {
             <footer className="footer">
                 <div className="footerButtons">
                 <a onClick={handleItem}>ITEMS</a>
-                <a>ADD ITEM</a>
+                <Modal1/>
                 <a onClick={handleList}>SHOPPING LIST</a>
                 <a onClick={handleProfile}>PROFILE</a>
                 </div>

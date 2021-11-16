@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Context } from "../../Context";
 import AddEmail from "../../components/Email/AddEmail";
+import Footer from "../../components/footer/Footer";
 
 export default function Profile() {
     document.title = 'Profile';
@@ -23,6 +24,7 @@ export default function Profile() {
     return (
         <div>
             <AddEmail addEmail={addEmail} />
+            <Footer/>
         </div>
     );
 };
