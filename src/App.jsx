@@ -10,7 +10,14 @@ import NavBar from "./components/Nav/NavBar";
 import Profile from "./pages/Profile/Profile";
 
 import './App.css';
+
+import ShoppingList from "./pages/ShoppingList/ShoppingList";
+
 import Scanner from "./pages/Home/Scanner";
+import Footer from "./components/footer/Footer";
+
+
+
 
 function App() {
 
@@ -26,7 +33,7 @@ function App() {
     return false;
   }
 
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [isLoggedIn, setIsLoggedIn] = useState(validateToken());
 
   const colors = {
@@ -40,6 +47,18 @@ function App() {
 
       text: "white",
       contrastTextColor: "white"
+    }
+    ,
+    light: {
+      primary: "#ffffff",
+      secondary: "#f3f6f4",
+      secondaryHover: "#505151",
+
+      contrast: "#2d88ff",
+      contrastHover: "#4e9afd",
+
+      text: "black",
+      contrastTextColor: "black"
     }
   }
 
@@ -58,9 +77,11 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path ="list" element={<ShoppingList/>} /> 
 
           <Route path="*" element={<NotFound />} />
         </Routes >
+        <Footer/>
       </Context.Provider >
     </div >
   );

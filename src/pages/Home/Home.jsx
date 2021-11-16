@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Item from "../../components/Item/Item";
 import { Context } from "../../Context";
+import Modal1 from "./Modal1";
+
 
 export default function Home() {
     document.title = 'Home';
@@ -50,21 +52,34 @@ export default function Home() {
 
 
     const getItems = () => {
+
+        itemsData.sort((a, b) => {
+            let check1 = a.expiry
+            let check2 = b.expiry
+            if (check1 < check2) return -1
+            if (check1 > check2) return 1
+            return 0
+        })
+
         if (!itemsData.length > 0)
             return <center style={{ color: 'red' }}><h3>NO ITEMS</h3></center>
 
-        return itemsData.map((item) => <Item
+        return itemsData.map((item) => <><Item
             key={item.id}
             id={item.id}
             name={item.name}
             expiry={item.expiry}
             barcode={item.barcode}
             image={item.image}
-        />)
+        />
+        <hr/>
+        </>
+        )
     }
 
     return (
         <>
+            
             {
                 isLoggedIn && <Container>
                     {getItems()}

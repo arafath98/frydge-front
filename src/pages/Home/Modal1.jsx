@@ -8,9 +8,13 @@ const Modal1 = () => {
 
     return (
         <>
+        <div className='text-center'>
+
             <Button variant="primary" onClick={handleShow}>
                 Add Item
             </Button>
+
+        </div>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -25,9 +29,9 @@ const Modal1 = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    {/* <Button variant="primary" onClick={handleClose}>
                         Get Data
-                    </Button>
+                    </Button> */}
                 </Modal.Footer>
             </Modal>
         </>)

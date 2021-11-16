@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Context } from "../../Context";
 import AddEmail from "../../components/Email/AddEmail";
 
+
 export default function Profile() {
     document.title = 'Profile';
     const { isLoggedIn } = useContext(Context)

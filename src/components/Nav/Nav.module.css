@@ -6,7 +6,8 @@
 }
 
 .title {
-    font-size: 27px;
+    font-size: 60px; /*changed from 27px */
+    /* font-family: 'M PLUS Code Latin', sans-serif; */
 }
 
 .links {
