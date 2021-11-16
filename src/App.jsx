@@ -14,6 +14,7 @@ import './App.css';
 import ShoppingList from "./pages/ShoppingList/ShoppingList";
 
 import Scanner from "./pages/Home/Scanner";
+import Footer from "./components/footer/Footer";
 
 
 
@@ -80,6 +81,7 @@ function App() {
 
           <Route path="*" element={<NotFound />} />
         </Routes >
+        <Footer/>
       </Context.Provider >
     </div >
   );

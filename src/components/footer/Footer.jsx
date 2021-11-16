@@ -20,9 +20,10 @@ export default function Footer() {
             <footer className="footer">
                 <div className="footerButtons">
                 <a onClick={handleItem}>ITEMS</a>
-                <Modal1/>
                 <a onClick={handleList}>SHOPPING LIST</a>
+                <Modal1/>
                 <a onClick={handleProfile}>PROFILE</a>
+                <a>SETTINGS</a>
                 </div>
             </footer>
             

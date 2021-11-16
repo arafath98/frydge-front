@@ -133,7 +133,6 @@ export default function ShoppingList() {
                 </form>
             </div>
             <button onClick={handleClear}>CLEAR SHOPPING LIST</button>
-            <Footer/>
         </div>
     )
 }

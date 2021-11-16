@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import Item from "../../components/Item/Item";
 import { Context } from "../../Context";
 import Modal1 from "./Modal1";
-import Footer from "../../components/footer/Footer";
+
 
 export default function Home() {
     document.title = 'Home';
@@ -79,13 +79,12 @@ export default function Home() {
 
     return (
         <>
-            <Modal1 />
+            
             {
                 isLoggedIn && <Container>
                     {getItems()}
                 </Container>
             }
-            <Footer/>
         </>
 
     );
