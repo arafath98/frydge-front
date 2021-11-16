@@ -11,6 +11,11 @@ import Profile from "./pages/Profile/Profile";
 
 import './App.css';
 import Scanner from "./pages/Home/Scanner";
+<<<<<<< HEAD
+=======
+import NavBar from "./components/Nav/NavBar"
+import Modal1 from "./pages/Home/Modal1"
+>>>>>>> barcode
 
 function App() {
 

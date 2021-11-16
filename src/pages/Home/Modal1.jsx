@@ -8,7 +8,7 @@ const Modal1 = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" className='justify-content-center' onClick={handleShow}>
                 Add Item
             </Button>
 
@@ -25,9 +25,9 @@ const Modal1 = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    {/* <Button variant="primary" onClick={handleClose}>
                         Get Data
-                    </Button>
+                    </Button> */}
                 </Modal.Footer>
             </Modal>
         </>)
