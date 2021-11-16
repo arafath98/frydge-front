@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import "./list.css"
+import Footer from '../../components/footer/Footer'
 
 export default function ShoppingList() {
     const [isFetched, setIsFetched] = useState(false)
@@ -66,7 +67,11 @@ export default function ShoppingList() {
     const handleChange = (e) => {
         
         console.log(e)
-        e.target.previousSibling.classList.toggle('crossed')
+        if(e.target.checked) {
+        e.target.previousSibling.classList.add('crossed')
+        } else if (!e.target.checked) {
+            e.target.previousSibling.classList.remove('crossed')
+        }
     }
 
 
@@ -128,7 +133,7 @@ export default function ShoppingList() {
                 </form>
             </div>
             <button onClick={handleClear}>CLEAR SHOPPING LIST</button>
-            
+            <Footer/>
         </div>
     )
 }
