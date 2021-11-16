@@ -14,7 +14,7 @@ import './App.css';
 import ShoppingList from "./pages/ShoppingList/ShoppingList";
 
 import Scanner from "./pages/Home/Scanner";
-import NavBar from "./components/Nav/NavBar"
+
 
 
 
