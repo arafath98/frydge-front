@@ -11,7 +11,11 @@ import Profile from "./pages/Profile/Profile";
 
 import './App.css';
 import Scanner from "./pages/Home/Scanner";
+
 import Landing from "./pages/Landing/Landing";
+
+import NavBar from "./components/Nav/NavBar"
+
 
 function App() {
 
