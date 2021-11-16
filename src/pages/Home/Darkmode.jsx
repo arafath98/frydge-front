@@ -1,14 +1,21 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Context } from '../../Context'
 
 const Darkmode = () => {
+    const [check, setCheck] = useState(false)
     const { theme, colors, setTheme } = useContext(Context)
 
     const switched = (e) => {
-        // e.preventDefault()
-       e.target.checked ? setTheme('dark'): setTheme('light')
-        console.log(e.target.checked) //value is true or false
+       
+       theme == 'light' ? setTheme('dark'): setTheme('light')
+      
+      
+        
     }
+
+    useEffect(()=> {
+      theme == 'dark' ? setCheck(true): setCheck(false)
+    },[theme])
 
     return (
         <>
@@ -18,8 +25,8 @@ const Darkmode = () => {
       <nav class="nav justify-content-center float-md-end">
         <div class="nav-link">
           <div class="form-check form-switch">
-            <input type="checkbox" class="form-check-input" id="darkSwitch" onClick={switched}/>
-            <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+            <input type="checkbox" class="form-check-input" id="darkSwitch" checked={check} onClick={switched}/>
+            <label class="custom-control-label" for="darkSwitch">{theme + ' theme'}</label>
           </div>
         </div>
         </nav>
