@@ -14,6 +14,7 @@ function Scanner() {
   const [item1, setItem1] = React.useState({})
   const [item2,setItem2] = React.useState({})
   const [check,setCheck] = React.useState(false)
+  const [barcodeInputShow,setBarcodeInputShow] = React.useState({})
 
 
 
@@ -37,8 +38,10 @@ function Scanner() {
   // }, [data])
 
   useDidMountEffect(() => {
+    
     let barcodeNo = data.text
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=https://api.barcodelookup.com/v3/products?barcode=9780140157376&formatted=y&key=zmfivgzyd1ojblmt39ilbbctxizd9j`)
+    console.log(barcodeNo)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
     .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
     .catch(resp => console.log('fetch failed'))
@@ -74,10 +77,21 @@ useDidMountEffect(() => {
     console.log('denied!!!')
   }
 
-  const manualShow = () => {
+  const manualShow = (e) => {
+    e.preventDefault()
+    let pressedBtn = e.target.value
     setScanned(true)
     setCheck(false)
-    setIsItem(false)
+    console.log(pressedBtn)
+    if(pressedBtn == 'Manually input name') {
+      setIsItem(false)
+    } 
+    else {
+      setBarcodeInputShow(false)
+    }
+    
+    
+    
   }
 
   useDidMountEffect(() => {
@@ -92,7 +106,25 @@ useDidMountEffect(() => {
     setIsItem(true)
     console.log('here is submit')
     
+  } 
+
+  const manualBarcodeSubmit = (e) => {
+    e.preventDefault()
+    let barcodeNo = document.getElementById('barcodebox').value
+    console.log(barcodeNo)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
+    .then(resp => resp.json())
+      .then(jsondata => setFetched(jsondata.products[0]))
+    setIsItem(true)
+
+    setBarcodeInputShow(true)
+    console.log('here is submit')
+    
   }
+
+//   useDidMountEffect(() => {
+//     setCheck(true)
+// },[barcodeInputShow])
 
   const itemSubmission = (e) => {
     e.preventDefault()
@@ -104,6 +136,7 @@ useDidMountEffect(() => {
     
     setDate(date)
     setShowDateInput(false)
+    setIsItem(true)
     setItem2({...item1,expiry:date})
     
     
@@ -144,7 +177,13 @@ useDidMountEffect(() => {
   />
   <div className='text-center'>
   <p className="text-dark display-4">{data.text}</p>
-  <input type='button' className='btn btn-primary' value='Manual input' onClick={manualShow}/>
+<div className='d-flex flex-column'>
+
+  <input type='button' data-toggle="button" aria-pressed="false" autoComplete="off" className='btn btn-primary my-3' value='Manually input barcode' onClick={manualShow}/>
+  <input type='button' data-toggle="button" aria-pressed="false" autoComplete="off" className='btn btn-primary' value='Manually input name' onClick={manualShow}/>
+
+</div>
+  
  
         </div>
     </>
@@ -157,12 +196,19 @@ useDidMountEffect(() => {
       </form></>
       
 }
+{ barcodeInputShow ? <></>:<><form onSubmit={manualBarcodeSubmit} id="form">
+  <label className='mx-2'>Barcode No:</label>
+        <input id='barcodebox' type='text'/>
+        <input type="submit" className='mx-1 btn btn-primary'/>
+      </form></>
+      
+}
 
       
 
       {check ? <>
 
-        <p className="text-dark display-2">Is your product the : {fetched.title} </p>
+        <p className="text-dark">Is your product the : {fetched.title} </p>
         <button className="btn btn-primary mx-5" onClick={confirmedItem}>Yes</button>
         <button className="btn btn-danger" onClick={deniedItem}>No</button> </>
         : <></>}
