@@ -188,11 +188,19 @@ function Scanner() {
         <input type="submit" className='mx-1 btn btn-primary' />
       </form></>
       }
-      {check ? <>
+        {check ? <>
+        
+        <div className="jumbotron text-center">
+        <h1 className="display-6">We found an item! <br/><hr/> {fetched.title}</h1>
 
-        <p className="text-dark">Is your product the : {fetched.title} </p>
-        <button className="btn btn-primary mx-5" onClick={confirmedItem}>Yes</button>
-        <button className="btn btn-danger" onClick={deniedItem}>No</button> </>
+        </div>
+        <div className="d-flex flex-row justify-content-center">
+
+        <button className="btn btn-primary mx-4" onClick={confirmedItem}>Yes</button>
+        <button className="btn btn-danger mx-4" onClick={deniedItem}>No</button> 
+
+        </div>
+        </>
         : <></>
       }
       {
