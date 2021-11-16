@@ -15,6 +15,7 @@ import ShoppingList from "./pages/ShoppingList/ShoppingList";
 
 import Scanner from "./pages/Home/Scanner";
 import Footer from "./components/footer/Footer";
+import Landing from "./components/Landing/Landing";
 
 
 
@@ -67,7 +68,7 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
-          <Route path="/" element={<h1>HOME</h1>} />
+          <Route path="/" element={<Landing/>} />
 
           <Route path="/home" element={<Home />} />
 
@@ -77,11 +78,11 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path ="list" element={<ShoppingList/>} /> 
+          <Route path ="/list" element={<ShoppingList/>} /> 
 
           <Route path="*" element={<NotFound />} />
         </Routes >
-        <Footer/>
+        {isLoggedIn ? <Footer/>: null}
       </Context.Provider >
     </div >
   );
