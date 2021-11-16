@@ -6,9 +6,6 @@ import Login from "./pages/Auth/Login";
 import NotFound from './pages/NotFound/NotFound';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
-<<<<<<< HEAD
-import NavBar from "./components/Nav/NavBar"
-=======
 import NavBar from "./components/Nav/NavBar";
 import Profile from "./pages/Profile/Profile";
 
@@ -20,7 +17,6 @@ import Scanner from "./pages/Home/Scanner";
 import Footer from "./components/footer/Footer";
 
 
->>>>>>> 45f421d5de43b9ef3634ee6f7dec83fbcef195f4
 
 
 function App() {
