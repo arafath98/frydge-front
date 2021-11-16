@@ -77,7 +77,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path ="list" element={<ShoppingList/>} /> 
+          <Route path ="/list" element={<ShoppingList/>} /> 
 
           <Route path="*" element={<NotFound />} />
         </Routes >
