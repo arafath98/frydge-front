@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap';
 import { Context } from "../../Context";
 
 import Nav from "./Nav";
-
+import Darkmode from "../../pages/Home/Darkmode";
 import styles from "./Nav.module.css";
 
 export default function NavBar() {
@@ -31,7 +31,13 @@ export default function NavBar() {
                             <Link to="/login">Login</Link>
                             <Link to="/register">Register</Link>
                         </>
-                    }
+                    } 
+
+                    {isLoggedIn && <Darkmode/>
+                    
+          
+        
+          }
 
                     {
                         isLoggedIn && <>
