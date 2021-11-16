@@ -6,8 +6,13 @@ export default function Footer() {
     const navigate = useNavigate()
     
     const handleItem = () => {
-        navigate('/home')
-        console.log('clicked')
+        navigate('/home')   
+    }
+    const handleList = () => {
+        navigate('/list')
+    }
+    const handleProfile = () => {
+        navigate('/profile')
     }
     return (
         <div>
@@ -15,8 +20,8 @@ export default function Footer() {
                 <div className="footerButtons">
                 <a onClick={handleItem}>ITEMS</a>
                 <a>ADD ITEM</a>
-                <a>SHOPPING LIST</a>
-                <a>PROFILE</a>
+                <a onClick={handleList}>SHOPPING LIST</a>
+                <a onClick={handleProfile}>PROFILE</a>
                 </div>
             </footer>
             
