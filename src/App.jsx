@@ -24,7 +24,7 @@ function App() {
     return false;
   }
 
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [isLoggedIn, setIsLoggedIn] = useState(validateToken());
 
   const colors = {
@@ -38,6 +38,18 @@ function App() {
 
       text: "white",
       contrastTextColor: "white"
+    }
+    ,
+    light: {
+      primary: "#ffffff",
+      secondary: "#f3f6f4",
+      secondaryHover: "#505151",
+
+      contrast: "#2d88ff",
+      contrastHover: "#4e9afd",
+
+      text: "black",
+      contrastTextColor: "black"
     }
   }
 
