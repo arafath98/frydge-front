@@ -8,9 +8,13 @@ const Modal1 = () => {
 
     return (
         <>
-            <Button variant="primary" className='justify-content-center' onClick={handleShow}>
+        <div className='text-center'>
+
+            <Button variant="primary" onClick={handleShow}>
                 Add Item
             </Button>
+
+        </div>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
