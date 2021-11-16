@@ -4,9 +4,9 @@ import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 import { useNavigate } from "react-router-dom";
 
 function Scanner() {
-  const [data, setData] = React.useState({ text: "Scanning... (Make sure the barcode is in focus" });
+  const [data, setData] = React.useState({ text: "Scanning..." });
   const [fetched, setFetched] = React.useState(false)
-  const [isItem, setIsItem] = React.useState(false)
+  const [isItem, setIsItem] = React.useState(true)
   const [date, setDate] = React.useState('')
   const [complete, setComplete] = React.useState('')
   const [scanned, setScanned] = React.useState(false)
@@ -68,21 +68,44 @@ useDidMountEffect(() => {
 
   const deniedItem = (e) => {
     e.preventDefault()
-    document.getElementById('textbox').value = ''
+    // 
     setIsItem(false)
+    setCheck(false)
     console.log('denied!!!')
+  }
+
+  const manualShow = () => {
+    setScanned(true)
+    setCheck(false)
+    setIsItem(false)
+  }
+
+  useDidMountEffect(() => {
+    console.log(item1)
+},[item1])
+
+  const manualSubmit = (e) => {
+    e.preventDefault()
+    let name = document.getElementById('textbox').value
+    setItem1({ barcode: 1 , name , image:"https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"})
+    setShowDateInput(true)
+    setIsItem(true)
+    console.log('here is submit')
+    
   }
 
   const itemSubmission = (e) => {
     e.preventDefault()
     let date = document.getElementById('date').value
     console.log(date)
-    setComplete(true)
-    setIsItem(false)
+    
+    if(fetched) setIsItem(false)
+    else (setIsItem(true))
+    
     setDate(date)
     setShowDateInput(false)
     setItem2({...item1,expiry:date})
-
+    
     
   }
 
@@ -103,6 +126,7 @@ useDidMountEffect(() => {
       fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`,options)
       .then(resp => resp.json())
       .then(resp => console.log(resp))
+      .then(resp => setComplete(true))
 
 },[item2])
 
@@ -118,13 +142,18 @@ useDidMountEffect(() => {
     onUpdate={onChange}
     delay={100}
   />
+  <div className='text-center'>
   <p className="text-dark display-4">{data.text}</p>
+  <input type='button' className='btn btn-primary' value='Manual input' onClick={manualShow}/>
+ 
+        </div>
     </>
     
 }
-{ isItem ? <></>:<><form onSubmit={onsubmit} id="form">
+{ isItem ? <></>:<><form onSubmit={manualSubmit} id="form">
+  <label className='mx-2'>Item name:</label>
         <input id='textbox' type='text'/>
-        <input type="submit" />
+        <input type="submit" className='mx-1 btn btn-primary'/>
       </form></>
       
 }
@@ -133,7 +162,7 @@ useDidMountEffect(() => {
 
       {check ? <>
 
-        <h1 className="text-dark display-2">Is your product the : {fetched.title} </h1>
+        <p className="text-dark display-2">Is your product the : {fetched.title} </p>
         <button className="btn btn-primary mx-5" onClick={confirmedItem}>Yes</button>
         <button className="btn btn-danger" onClick={deniedItem}>No</button> </>
         : <></>}
@@ -141,7 +170,7 @@ useDidMountEffect(() => {
 
       {showDateInput ?
         <>
-          <h1 className="text-dark display-2">Please enter the item's expiry date</h1>
+          <p className="text-dark display-2">Please enter the item's expiry date</p>
           <form onSubmit={itemSubmission}>
             <input id="date" type='date' />
             <input type="submit" />
