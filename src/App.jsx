@@ -6,7 +6,21 @@ import Login from "./pages/Auth/Login";
 import NotFound from './pages/NotFound/NotFound';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
+<<<<<<< HEAD
 import NavBar from "./components/Nav/NavBar"
+=======
+import NavBar from "./components/Nav/NavBar";
+import Profile from "./pages/Profile/Profile";
+
+import './App.css';
+
+import ShoppingList from "./pages/ShoppingList/ShoppingList";
+
+import Scanner from "./pages/Home/Scanner";
+import Footer from "./components/footer/Footer";
+
+
+>>>>>>> 45f421d5de43b9ef3634ee6f7dec83fbcef195f4
 
 
 function App() {
@@ -57,12 +71,22 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<h1>HOME</h1>} />
+
+          <Route path="/home" element={<Home />} />
+
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/scanner" element={<Scanner />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path ="list" element={<ShoppingList/>} /> 
+
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Context.Provider>
+        </Routes >
+        <Footer/>
+      </Context.Provider >
     </div >
   );
 }

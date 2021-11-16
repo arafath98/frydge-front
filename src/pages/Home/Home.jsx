@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { getItemsFromApi } from "../../api/ItemsData";
 import Item from "../../components/Item/Item";
 import { Context } from "../../Context";
 import Modal1 from "./Modal1";
+
 
 export default function Home() {
     document.title = 'Home';
@@ -79,7 +79,7 @@ export default function Home() {
 
     return (
         <>
-            <Modal1 />
+            
             {
                 isLoggedIn && <Container>
                     {getItems()}
