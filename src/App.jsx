@@ -7,10 +7,16 @@ import NotFound from './pages/NotFound/NotFound';
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import NavBar from "./components/Nav/NavBar";
-import Try from "./pages/Try";
+import Profile from "./pages/Profile/Profile";
 
 import './App.css';
+
 import ShoppingList from "./pages/ShoppingList/ShoppingList";
+
+import Scanner from "./pages/Home/Scanner";
+import NavBar from "./components/Nav/NavBar"
+
+
 
 function App() {
 
@@ -52,15 +58,17 @@ function App() {
 
           <Route path="/home" element={<Home />} />
 
-          <Route path="/try" element={<Try />} />
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/scanner" element={<Scanner />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path ="list" element={<ShoppingList/>} /> 
 
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Context.Provider>
+        </Routes >
+      </Context.Provider >
     </div >
   );
 }

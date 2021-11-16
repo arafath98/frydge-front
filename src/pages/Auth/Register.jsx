@@ -24,10 +24,11 @@ export default function Register() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isLoggedIn)
-            navigate("/");
-    }, []);
+    // useEffect(() => {
+
+    //     if (isLoggedIn)
+    //         navigate("/");
+    // }, []);
 
     const fields = [
         { name: "username", type: "text", placeholder: "Username..", setState: setUsername },
@@ -102,7 +103,7 @@ export default function Register() {
             body: JSON.stringify(data)
         };
 
-        fetch("http://127.0.0.1:8000/users/register/", options)
+        fetch("https://frydgeapp.herokuapp.com/users/register/", options)
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
@@ -114,25 +115,25 @@ export default function Register() {
     return (
         <>
             {
-                isLoggedIn ? <></> :
+                // isLoggedIn ? <></> :
 
-                    <Container className={styles.container}>
-                        <h1 style={{ color: colors[theme].text }}>Register</h1>
+                <Container className={styles.container}>
+                    <h1 style={{ color: colors[theme].text }}>Register</h1>
 
-                        {errorMessages.length > 0 && errorMessages.map(error =>
-                            <h3 style={{ color: "red" }}>{error}</h3>
-                        )}
+                    {errorMessages.length > 0 && errorMessages.map(error =>
+                        <h3 style={{ color: "red" }}>{error}</h3>
+                    )}
 
-                        <form className={styles.form}>
-                            {getInputRows(fields)}
+                    <form className={styles.form}>
+                        {getInputRows(fields)}
 
-                            <Row className="justify-content-center">
-                                <Col xs={10} sm={10} md={8} lg={7} xl={6}>
-                                    <Button className={styles.button} background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={register}>Register</Button>
-                                </Col>
-                            </Row>
-                        </form>
-                    </Container>
+                        <Row className="justify-content-center">
+                            <Col xs={10} sm={10} md={8} lg={7} xl={6}>
+                                <Button className={styles.button} background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={register}>Register</Button>
+                            </Col>
+                        </Row>
+                    </form>
+                </Container>
             }
         </>
     );
