@@ -26,10 +26,13 @@ export default function ShoppingList() {
         console.log(token)
         let results = await axios(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`,  options)
         let data = results.data.data
+        console.log(data)
         let shoppingList = []
         for (let item in data) {
-            shoppingList.push(data[item].listItem)
+            
+            shoppingList.push(data[item])
         }
+        
         setList(shoppingList)
 
     }
@@ -45,16 +48,18 @@ export default function ShoppingList() {
         let newElement = document.getElementById('item-input').value
         let form = document.getElementById('form')
         e.preventDefault()
-        setList(prev => [...prev, newElement])
-        form.reset()
+        
 
         let body = {
             "item": newElement
         }
 
         axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`, body, options)
+        .then(response => { setList(prev => [...prev, response.data.item])
+        form.reset()})
+
        
-        
+      
 
     }
 
@@ -64,27 +69,38 @@ export default function ShoppingList() {
         e.target.previousSibling.classList.toggle('crossed')
     }
 
+
+
+    let deleteOptions = {
+        
+        headers: {
+            "token":  token,
+            'Content-Type': 'application/json',
+           
+        }
+
+    }
+    
+    
     const handleClear = (e) => {
         
         for (let things in list) {
-            if (document.getElementById(things).classList.contains('crossed')){
-                let selected = document.getElementById(things)
-                
-                let deleteOptions = {
-                    headers: {
-                        "HTTP_TOKEN": token,
-                        'Content-Type': 'application/json'
-                    }
+            if (document.getElementById(list[things].id).classList.contains('crossed')){
+                let selected = list[things].id
+                let selectedItem = list[things].listItem
+                console.log(token)
 
-                }
-                
                 let deleteBody = {
-                    "item" : selected
+                    "id" : selected,
+                    "item": selectedItem
                 }
-                axios.delete(`http://localhost:8000/users/delete/`, deleteBody,  deleteOptions)
+               
+                axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/delete/`, deleteBody,  deleteOptions)
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.log(error))
+
+                getData()
                
                
             }
@@ -94,13 +110,13 @@ export default function ShoppingList() {
 
     
     return (
-        <div>
+        <div id="container">
             <p>Shopping List</p>
             <div id="list">
                 <ul>
-                    {list.map((item, index) =>( 
-                    <div className="item-cont">
-                    <li id={index} key={index}>{item}</li>
+                    {list.map((item,) =>( 
+                    <div  className="item-cont">
+                    <li id={item.id} key={item.id}>{item.listItem}</li>
                     <input id="checkbox" type="checkbox" onChange={handleChange}></input>
                     </div>))}
                 </ul>
