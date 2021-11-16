@@ -13,7 +13,7 @@ const Landing = () => {
                 global effort to reduce food waste.
 
             </p>
-            <img src="https://media.istockphoto.com/vectors/garbage-recycle-bin-white-background-vector-image-vector-id974623708?b=1&k=20&m=974623708&s=612x612&w=0&h=bGAzK5sMJppOYSsrUecob0ngCnr22UVetB0Jo3jadxs=" alt="Foodwastage" />
+            <img src="https://i.ibb.co/NKY6B3S/wastage.png" alt="Foodwastage" />
         </div>
         </>
     )
