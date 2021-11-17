@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0px;
     right: 0px;
-    border: 1px solid grey;
+    border-top: 1px solid grey;
     background-color: rgb(243, 243, 243);
     height: 60px;
 }
@@ -42,7 +42,15 @@
 }
 
 
-#settings {
+#settingsl, #settingsd {
     margin-right: 10px;
     font-size: 30px;
+}
+
+#settingsl {
+    color: black;
+}
+
+#settingsd {
+    color: white;
 }

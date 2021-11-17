@@ -44,13 +44,13 @@ export default function Footer() {
 
     return (
         <div>
-            <footer className="footer">
+            <footer className="footer" style={{"background-color":colors[theme].primary}}>
                 <div className="footerButtons">
                 <a  onClick={handleItem}>{<FaShoppingBasket className={page == 'item' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
                 <a   onClick={handleList}>{<FaEdit id="shopping-list-button" className={page == 'list' ? 'selected nav-btn': 'nav-btn'}/>}</a>
                 <Modal1 className="nav-btn" id="add-button" />
                 <a  onClick={handleProfile}><FaUserCircle id ="profile-button" className={page == 'profile' ? 'selected nav-btn': 'nav-btn'}/></a>
-                <DropdownButton id="dropdown-basic-button"  title={<FaCog className="nav-btn" id="settings" />} onClick={handleClick}>
+                <DropdownButton id="dropdown-basic-button"  title={<FaCog className="nav-btn" id={theme == "light" ? "settingsl":"settingsd"} />} onClick={handleClick}>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
                     <Dropdown.Item onClick={handleDm}>{<Darkmode/>}</Dropdown.Item>
                 </DropdownButton>
