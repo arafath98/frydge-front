@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 import { useNavigate } from "react-router-dom";
+
+import { Context } from "../../Context";
 
 function Scanner() {
   const [data, setData] = React.useState({ text: "Scanning..." });
@@ -16,7 +18,10 @@ function Scanner() {
   const [check, setCheck] = React.useState(false)
   const [barcodeInputShow, setBarcodeInputShow] = React.useState({})
   const [pleaseInputBarcode, setPleaseInputBarcode] = React.useState(false)
-  const [barcodeNotFound,setBarcodeNotFound] = React.useState(false)
+  const [barcodeNotFound, setBarcodeNotFound] = React.useState(false)
+
+  const { setItemsData } = useContext(Context);
+
   const [noDate, setNoDate] = React.useState(false)
   const navigate = useNavigate();
 
@@ -108,11 +113,13 @@ function Scanner() {
     } else {
       fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
         .then(resp => resp.json())
-        .then(jsondata => {setFetched(jsondata.products[0])
+        .then(jsondata => {
+          setFetched(jsondata.products[0])
           setIsItem(true)
-          setBarcodeInputShow(true)})
+          setBarcodeInputShow(true)
+        })
         .catch(resp => setBarcodeNotFound(true))
-      
+
     }
   }
 
@@ -124,18 +131,18 @@ function Scanner() {
     setNoDate(false)
     e.preventDefault()
     let date = document.getElementById('date').value
-    if(!date) {
-    setNoDate(true)
+    if (!date) {
+      setNoDate(true)
     } else {
-    console.log(date)
+      console.log(date)
 
-    if (fetched) setIsItem(false)
-    else (setIsItem(true))
+      if (fetched) setIsItem(false)
+      else (setIsItem(true))
 
-    setDate(date)
-    setShowDateInput(false)
-    setIsItem(true)
-    setItem2({ ...item1, expiry: date })
+      setDate(date)
+      setShowDateInput(false)
+      setIsItem(true)
+      setItem2({ ...item1, expiry: date })
     }
   }
 
@@ -155,8 +162,13 @@ function Scanner() {
 
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`, options)
       .then(resp => resp.json())
-      .then(resp => console.log(resp))
-      .then(resp => setComplete(true))
+      // .then(resp => console.log(resp))
+      .then(resp => {
+        console.log(resp);
+        setComplete(true);
+        navigate("/");
+        navigate("/home");
+      })
 
   }, [item2])
 
@@ -230,7 +242,7 @@ function Scanner() {
             </form>
           </> : <></>
       }
-      {noDate ? <><p className='text-center'>Please enter a date</p></>:<></>
+      {noDate ? <><p className='text-center'>Please enter a date</p></> : <></>
       }
       {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
     </>
