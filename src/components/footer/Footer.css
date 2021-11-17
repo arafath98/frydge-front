@@ -1,12 +1,48 @@
 .footer {
     position:fixed;
     bottom: 0;
-    left: 5px;
-    right: 5px;
+    left: 0px;
+    right: 0px;
+    border: 1px solid grey;
+    background-color: rgb(243, 243, 243);
+    height: 60px;
 }
+
+#dropdown-basic-button {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+#dropdown-basic-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.selected {
+    color: rgb(51, 112, 224);
+}
+
 
 .footerButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -15px;
+}
+
+.nav-btn {
+    margin-top: 7.5px;
+    font-size: 35px;
+}
+
+#item-button {
+    margin-left: 12px;
+    
+}
+
+
+#settings {
+    margin-right: 10px;
+    font-size: 30px;
 }

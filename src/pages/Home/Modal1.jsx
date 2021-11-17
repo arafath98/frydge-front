@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import Scanner from './Scanner';
+import './home.css'
 const Modal1 = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -10,8 +11,8 @@ const Modal1 = () => {
         <>
         <div className='text-center'>
 
-            <Button variant="primary" onClick={handleShow}>
-                Add Item
+            <Button id="add-button" variant="primary" onClick={handleShow}>
+                <span id="plus" >+</span>
             </Button>
 
         </div>

@@ -1,0 +1,17 @@
+#add-button {
+    margin-top: 3px;
+    
+    background-color:transparent    ;
+    border:none;
+    color: black;
+}
+
+#add-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#plus {
+    font-size: 45px;
+    font-weight: 600;
+}
