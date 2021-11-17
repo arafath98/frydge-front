@@ -11,7 +11,8 @@
 .item-cont {
     display: flex;
     justify-content: space-between;
-    width: 320%;
+    width: 250%;
+    margin-left: -15px;
     
 }
 
@@ -32,13 +33,13 @@ ul {
     border: 0;
     clear:both;
     display:block;
-    width: 320%;               
+    width: 250%;               
     height: 1px;
   }
 
 #icon {
-    width:27px;
-    height: 30px;
+    width:40px;
+    height: 48px;
 }
 
 #h3 {
@@ -113,6 +114,7 @@ ul {
     padding: 5px;
     box-shadow: 0 2px rgb(145, 172, 189);
     transition: 0.3s;
+    font-size: 20px;
 }
 
 #clear:hover {
@@ -126,4 +128,14 @@ ul {
     justify-content: space-between;
     width: 75%;
     margin-top: 20px;
+}
+
+#quan {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#sl-item {
+    font-size: 20px;
+    font-style: 700;
 }
