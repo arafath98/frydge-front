@@ -5,7 +5,8 @@ import { useNavigate } from "react-router";
 
 import Button from "../../components/UI/Button";
 
-import Logo from "./not-found2.svg";
+import logo from "./not-found2.svg";
+import logo2 from "./not-found.svg";
 import styles from "./styles.module.css";
 
 export default function NotFound() {
@@ -22,7 +23,7 @@ export default function NotFound() {
         <Container className="py-2">
             <Row className="justify-content-center">
                 <Col xs={12} sm={11} md={8} lg={6} xl={5}>
-                    <img className={styles.logo} src={Logo} alt="404" />
+                    <img className={styles.logo} src={theme == "dark" ? logo2 : logo} alt="404" />
                 </Col>
             </Row>
 

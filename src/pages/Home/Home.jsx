@@ -49,6 +49,23 @@ export default function Home() {
             .catch(err => err)
     }, []);
 
+    const getExpiryDays = (expiry) => {
+        if (expiry === 0)
+            return "Expired today!"
+
+        if (expiry <= -1) {
+            if (expiry === -1)
+                return "Expired 1 day ago!"
+
+            return `Expired ${Math.abs(expiry)} days ago!`
+        }
+
+        if (expiry === 1)
+            return "In 1 day"
+
+        return `In ${Math.abs(expiry)} days`
+    }
+
 
     const getItems = () => {
 
@@ -67,18 +84,18 @@ export default function Home() {
             key={item.id}
             id={item.id}
             name={item.name}
-            expiry={item.expiry}
+            expiry={getExpiryDays(item.expiry)}
             barcode={item.barcode}
             image={item.image}
         />
-        <hr/>
+            <hr />
         </>
         )
     }
 
     return (
         <>
-            
+
             {
                 isLoggedIn && <Container>
                     {getItems()}
