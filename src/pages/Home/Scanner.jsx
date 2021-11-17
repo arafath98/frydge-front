@@ -156,7 +156,9 @@ function Scanner() {
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`, options)
       .then(resp => resp.json())
       .then(resp => console.log(resp))
-      .then(resp => setComplete(true))
+      .then(resp => {setComplete(true)
+    navigate('/')
+    navigate('/home')})
 
   }, [item2])
 
@@ -223,14 +225,14 @@ function Scanner() {
       {
         showDateInput ?
           <>
-            <p className="text-dark display-2">Please enter the item's expiry date</p>
+            <p className="text-dark display-4">Please enter the item's expiry date</p>
             <form onSubmit={itemSubmission}>
               <input id="date" type='date' />
               <input type="submit" />
             </form>
           </> : <></>
       }
-      {noDate ? <><p className='text-center'>Please enter a date</p></>:<></>
+      {noDate ? <><p className='text-center my-5'>Please enter a date</p></>:<></>
       }
       {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
     </>
