@@ -9,6 +9,6 @@ const Image = styled.img`
 
 export default function Delete(props) {
     return (
-        <Image onClick={props.onClick} src={Trash} />
+        <Image data-testid="delete" onClick={props.onClick} src={Trash} />
     )
 }

@@ -64,7 +64,7 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ backgroundColor: colors[theme].primary, color: colors[theme].text }}>
+    <div data-testid="app" className="App" style={{ backgroundColor: colors[theme].primary, color: colors[theme].text }}>
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
