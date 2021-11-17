@@ -25,10 +25,10 @@ const Darkmode = () => {
       <nav class="nav justify-content-center float-md-end">
         <div class="nav-link">
           <div class="form-check form-switch">
+            <label id="dm-label"class="custom-control-label" for="darkSwitch">{theme + ' theme'}</label>
             <input type="checkbox" class="form-check-input" id="darkSwitch" checked={check} onClick={switched}/>
-            <label class="custom-control-label" for="darkSwitch">{theme + ' theme'}</label>
           </div>
-        </div>
+        </div>  
         </nav>
         </div>
         </>
