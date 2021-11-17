@@ -13,7 +13,8 @@ export default function Home() {
     const { itemsData, isLoggedIn, setItemsData, setUsername, theme, colors } = useContext(Context);
 
     const [searchInput, setSearchInput] = useState("");
-    const [filteredItems, setFilteredItems] = useState(itemsData);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [loaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -33,7 +34,7 @@ export default function Home() {
         fetch("https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/", options)
             .then(response => response.json())
             .then(data => {
-                setItemsData(data.data.map((item) => {
+                const d = data.data.map((item) => {
                     const date = item["expiry"].split("-")
                     const date1 = new Date(`${date[1]}/${date[2]}/${date[0]}`)
                     const date2 = new Date()
@@ -41,7 +42,11 @@ export default function Home() {
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                     item.expiry = diffDays
                     return item
-                }));
+                });
+
+                setIsLoaded(true);
+                setItemsData(d);
+                setFilteredItems(d);
                 setUsername(data.username);
                 // items expiring within 5 day
             })
@@ -120,7 +125,8 @@ export default function Home() {
                         </Col>
                     </Row>
 
-                    {getItems()}
+                    {loaded ? getItems() : <center style={{ color: 'red' }}><h3>Loading..</h3></center>}
+
                 </Container>
             }
         </>
