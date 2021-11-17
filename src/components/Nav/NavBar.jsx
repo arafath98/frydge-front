@@ -32,20 +32,20 @@ export default function NavBar() {
                             <Link to="/register">Register</Link>
                         </>
                     } 
-
+{/* 
                     {isLoggedIn && <Darkmode/>
                     
           
         
-          }
+          } */}
 
-                    {
+                    {/* {
                         isLoggedIn && <>
                             <Link to="/home">Home</Link>
                             <Link to="/profile">Profile</Link>
                             <Link to="/" onClick={logout}>Logout</Link>
                         </>
-                    }
+                    } */}
                 </div>
             </Container>
         </Nav>
