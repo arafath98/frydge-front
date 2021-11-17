@@ -35,7 +35,7 @@ export default function ShoppingList() {
 
     const getData = async () => {
 
-        console.log(token)
+        
         let results = await axios(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`, options)
         let data = results.data.data
         let shoppingList = []
@@ -43,7 +43,7 @@ export default function ShoppingList() {
 
             shoppingList.push(data[item])
         }
-        console.log(shoppingList)
+       
         setList(shoppingList)
 
     }
@@ -57,12 +57,12 @@ export default function ShoppingList() {
         let newElement = document.getElementById('item-input').value
 
         let quantity = document.getElementById('quantity').value
-        console.log(quantity)
+       
         let type = document.getElementById('type').value
         let form = document.getElementById('form')
 
 
-        console.log(type)
+        
         let body = {
             "item": newElement,
             "quantity": quantity,
@@ -72,7 +72,7 @@ export default function ShoppingList() {
         axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`, body, options)
 
             .then(response => {
-                console.log('test ?')
+                
                 setList(prev => [...prev, response.data.item])
                 form.reset()
 
@@ -116,9 +116,11 @@ export default function ShoppingList() {
 
 
     const handleClear = (e) => {
-        console.log("clicked")
         for (let things in list) {
+            console.log(document.getElementById(list[things].id))
+
             if (document.getElementById(list[things].id).checked) {
+                console.log("wagwan")
                 let selected = list[things].id
                 let deleteBody = {
                     "id": selected,
@@ -129,12 +131,12 @@ export default function ShoppingList() {
                 getData()
                 getData()
                
-                document.querySelectorAll('input[type=checkbox').forEach(el => el.checked = false)
+               
 
             }
         }
 
-
+        document.querySelectorAll('input[type=checkbox').forEach(el => el.checked = false)
 
     }
 
