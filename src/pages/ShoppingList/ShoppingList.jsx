@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import "./list.css"
 import Footer from '../../components/footer/Footer'
+import { Context } from "../../Context";
+
 
 export default function ShoppingList() {
+    const {theme, colors, setTheme  } = useContext(Context);
     const [isFetched, setIsFetched] = useState(false)
     const [list, setList] = useState([])
 
@@ -67,18 +70,25 @@ export default function ShoppingList() {
       
 
     }
+    const handleChange = (e) => {
 
+        console.log(e)
+        if(e.target.checked) {
+        e.target.previousSibling.classList.add('crossed')
+        } else if (!e.target.checked) {
+            e.target.previousSibling.classList.remove('crossed')
+        }
+    }
   
-    const handleChangeLi = (e) => {
-    
-         if(!e.target.childNodes[0].classList.contains('crossed')) {
-            e.target.childNodes[0].classList.add('crossed')
-            e.target.childNodes[1].checked = true
-         } else if (e.target.childNodes[0].classList.contains('crossed')) {
-             e.target.childNodes[0].classList.remove('crossed')
-             e.target.childNodes[1].checked = false
-             console.log('this happened');
-         }
+   
+    const handleChangeIt = (e) => {
+        if (!e.target.classList.contains('crossed')) {
+            e.target.classList.add('crossed')
+            e.target.nextSibling.checked = true 
+        } else if (e.target.classList.contains('crossed')) {
+            e.target.classList.remove('crossed')
+            e.target.nextSibling.checked = false
+        }
     }
 
     let deleteOptions = {
@@ -121,23 +131,24 @@ export default function ShoppingList() {
     return (
         <div id="container">
             <p>Shopping List</p>
+            <div id ="add-item">
+                <form id="form" onSubmit={handleSubmit}>
+                <input id="item-input" type="text" placeholder="Enter Item to add"></input>
+                <button id="add-btn" type="submit">Add</button>
+                </form>
+            </div>
             <div id="list">
-                <ul>
+                <ul style={{"background-color":colors[theme].secondary }}>
                     {list.map((item,) =>( 
-                    <div  onClick={handleChangeLi} className="item-cont">
-                    <li id={item.id} key={item.id} >{item.listItem} </li>
-                    <input id="checkbox" type="checkbox" ></input>
+                    <div   className="item-cont">
+                    <li id={item.id} key={item.id} onClick={handleChangeIt}>{item.listItem} </li>
+                    <input id="checkbox" type="checkbox" onClick={handleChange}></input>
                     </div> 
                     ))}
                 </ul>
             </div>
-            <div id ="add-item">
-                <form id="form" onSubmit={handleSubmit}>
-                <input id="item-input" type="text" placeholder="Enter Item to add"></input>
-                <button type="submit" >Add</button>
-                </form>
-            </div>
-            <button onClick={handleClear}>CLEAR SHOPPING LIST</button>
+          
+            <button id="clear" onClick={handleClear}>Clear Items</button>
         </div>
     )
 }
