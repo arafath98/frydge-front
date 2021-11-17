@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import "./Footer.css"
 import { useNavigate } from "react-router-dom"
 import Modal1 from '../../pages/Home/Modal1'
@@ -10,7 +10,13 @@ import {FaShoppingBasket,FaEdit,FaUserCircle, FaCog,FaSignOutAlt } from "react-i
 export default function Footer() {
     const { isLoggedIn, setIsLoggedIn, theme, colors, setTheme  } = useContext(Context);
     const [check, setCheck] = useState(false)
-    const [page, setPage] = useState('item')
+    const [page, setPage] = useState('')
+
+    useEffect(()=> {
+        console.log(window.location.pathname);
+        setPage(window.location.pathname)
+        console.log(page);
+    },[])
   
 
     const navigate = useNavigate()
@@ -46,10 +52,10 @@ export default function Footer() {
         <div>
             <footer className="footer" style={{"background-color":colors[theme].primary}}>
                 <div className="footerButtons">
-                <a  onClick={handleItem}>{<FaShoppingBasket className={page == 'item' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
-                <a   onClick={handleList}>{<FaEdit id="shopping-list-button" className={page == 'list' ? 'selected nav-btn': 'nav-btn'}/>}</a>
+                <a  onClick={handleItem}>{<FaShoppingBasket className={page == '/item' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
+                <a   onClick={handleList}>{<FaEdit id="shopping-list-button" className={page == '/list' ? 'selected nav-btn': 'nav-btn'}/>}</a>
                 <Modal1 className="nav-btn" id="add-button" />
-                <a  onClick={handleProfile}><FaUserCircle id ="profile-button" className={page == 'profile' ? 'selected nav-btn': 'nav-btn'}/></a>
+                <a  onClick={handleProfile}><FaUserCircle id ="profile-button" className={page == '/profile' ? 'selected nav-btn': 'nav-btn'}/></a>
                 <DropdownButton id="dropdown-basic-button"  title={<FaCog className="nav-btn" id={theme == "light" ? "settingsl":"settingsd"} />} onClick={handleClick}>
                     <Dropdown.Item id="logout" onClick={logout}>Logout<FaSignOutAlt id="so"/></Dropdown.Item>
                     <hr/>

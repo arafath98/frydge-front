@@ -127,7 +127,8 @@ export default function ShoppingList() {
                     <div  onClick={handleChangeLi} className="item-cont">
                     <li id={item.id} key={item.id} >{item.listItem} </li>
                     <input id="checkbox" type="checkbox" ></input>
-                    </div>))}
+                    </div> 
+                    ))}
                 </ul>
             </div>
             <div id ="add-item">

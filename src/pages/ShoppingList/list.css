@@ -22,6 +22,12 @@ ul {
     background-color: violet;
     border: 1px solid black;
     border-radius: 10px;
+    height: 300px;
 
     
+}
+
+#checkbox {
+    margin-top: 3px;
+    margin-right: 5px;
 }
