@@ -99,6 +99,7 @@ export default function AddEmail(props) {
         setIsValidEmail(false);
     }
 
+
     return (
         <Container>
             <Row className="justify-content-center">
@@ -124,7 +125,7 @@ export default function AddEmail(props) {
                     <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={delEmail}>Delete Email</Button>
                 </Col>
             </Row>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar anchorOrigin={{ vertical: 'center', horizontal: 'center' }} open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert aria-label="popup" onClose={handleClose} severity={messageType} sx={{ width: '100%' }}>
                     {message}
                 </Alert>

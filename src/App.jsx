@@ -53,13 +53,13 @@ function App() {
     light: {
       primary: "#ffffff",
       secondary: "#f3f6f4",
-      secondaryHover: "#505151",
+      secondaryHover: "#d4d3d3",
 
       contrast: "#2d88ff",
       contrastHover: "#4e9afd",
 
       text: "black",
-      contrastTextColor: "black"
+      contrastTextColor: "white"
     }
   }
 
@@ -68,7 +68,7 @@ function App() {
       <Context.Provider value={{ theme, setTheme, colors, isLoggedIn, setIsLoggedIn, itemsData, setItemsData }} >
         <NavBar />
         <Routes>
-          <Route path="/" element={<Landing/>} />
+          <Route path="/" element={<Landing />} />
 
           <Route path="/home" element={<Home />} />
 
@@ -78,11 +78,11 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path ="/list" element={<ShoppingList/>} /> 
+          <Route path="/list" element={<ShoppingList />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes >
-        {isLoggedIn ? <Footer/>: null}
+        {isLoggedIn ? <Footer /> : null}
       </Context.Provider >
     </div >
   );
