@@ -130,15 +130,15 @@ export default function ShoppingList() {
                 getData()
                 getData()
                
-               
+                setOpen(true)
+                setMessageType("success")
+                setmessage("Item(s) cleared!")
 
             }
         }
 
         document.querySelectorAll('input[type=checkbox').forEach(el => el.checked = false)
-        setOpen(true)
-                setMessageType("success")
-                setmessage("Item(s) cleared!")
+        
 
     }
 
@@ -154,8 +154,8 @@ export default function ShoppingList() {
             </div>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add an item to shopping list</Modal.Title>
+                <Modal.Header >
+                    <Modal.Title>Add some items to your shopping list!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body><div id="add-item">
                 <form id="form" onSubmit={handleSubmit}>
