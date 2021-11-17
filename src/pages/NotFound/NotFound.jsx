@@ -20,15 +20,15 @@ export default function NotFound() {
     }
 
     return (
-        <Container className="py-2">
+        <Container className="">
             <Row className="justify-content-center">
-                <Col xs={12} sm={11} md={8} lg={6} xl={5}>
+                <Col xs={10} sm={10} md={7} lg={5} xl={4}>
                     <img className={styles.logo} src={theme == "dark" ? logo2 : logo} alt="404" />
                 </Col>
             </Row>
 
             <Row className="justify-content-center">
-                <Col xs={5} sm={11} md={8} lg={6} xl={2}>
+                <Col xs={10} sm={10} md={7} lg={5} xl={4}>
                     <Button
                         background={colors[theme].contrast}
                         color={colors[theme].contrastTextColor}
