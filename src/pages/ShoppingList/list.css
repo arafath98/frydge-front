@@ -11,7 +11,7 @@
 .item-cont {
     display: flex;
     justify-content: space-between;
-    width: 250px;
+    width: 275%;
     
 }
 
@@ -19,16 +19,29 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: violet;
-    border: 1px solid black;
     border-radius: 10px;
-   
     padding-top: 3px;
+    list-style: none;
+    margin-top: 1.5rem;
+    margin-right: 25px;
 
     
 }
 
-p {
+#hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 275%;               
+    height: 1px;
+  }
+
+#icon {
+    width:27px;
+    height: 30px;
+}
+
+#h3 {
     font-size: 25px;
     font-weight: 800;
 }
@@ -44,19 +57,50 @@ p {
 
 #item-input {
     text-align: center;
-    border: none;
+    margin: 5px;
+    
 }
 
+#quantity {
+    margin: 5px;
+    text-align: center;
+}
+
+#type {
+    text-align-last: center;
+    margin: 5px ;
+}
 #form {
     border: 1px solid rgba(150, 150, 150, 0.7);
     border-radius: 5px;
+    flex-direction: column;
+    display: flex;
 }
 #add-btn {
     border-radius: 0 5px 5px 0;
     box-shadow: -1px 0px rgb(208, 208, 219);
     border: none;
     background-color: rgb(51, 112, 224);
+    margin: 5px;
 }
+
+#add-new {
+    border: none;
+    background-color: rgb(51, 112, 224);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 2px rgb(145, 172, 189);
+    transition: 0.3s;
+    
+}
+
+#add-new:hover {
+    background-color: rgb(68, 121, 219);
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+
 
 #add-btn:hover {
     background-color: rgb(68, 121, 219);
@@ -75,4 +119,11 @@ p {
     background-color: rgb(68, 121, 219);
     transform: translateY(2px);
     box-shadow: none;
+}
+
+#addNclear {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-top: 20px;
 }
