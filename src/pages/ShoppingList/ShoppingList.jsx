@@ -107,23 +107,20 @@ export default function ShoppingList() {
         for (let things in list) {
             if (document.getElementById(list[things].id).classList.contains('crossed')){
                 let selected = list[things].id
-               
-                console.log(token)
-
                 let deleteBody = {
                     "id" : selected,
                 }
                
                 axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/delete/`, deleteBody,  deleteOptions)
-                .then(response => response.json())
-                .then(data => console.log(data))
                 .catch(error => console.log(error))
-
                 getData()
-               
+                getData()
+                document.querySelectorAll('input[type=checkbox').forEach(el => el.checked=false)
                
             }
         }
+
+       
        
     }
 
@@ -142,7 +139,7 @@ export default function ShoppingList() {
                     {list.map((item,) =>( 
                     <div   className="item-cont">
                     <li id={item.id} key={item.id} onClick={handleChangeIt}>{item.listItem} </li>
-                    <input id="checkbox" type="checkbox" onClick={handleChange}></input>
+                    <input id="checkbox" type="checkbox" onClick={handleChange} ></input>
                     </div> 
                     ))}
                 </ul>

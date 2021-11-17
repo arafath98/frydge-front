@@ -23,15 +23,15 @@ export default function Footer() {
     
     const handleItem = () => {
         navigate('/home')   
-        setPage('item')
+        setPage('/item')
     }
     const handleList = () => {
         navigate('/list')
-        setPage('list')
+        setPage('/list')
     }
     const handleProfile = () => {
         navigate('/profile')
-        setPage('profile')
+        setPage('/profile')
     }
     const logout = (e) => {
         e.preventDefault();
