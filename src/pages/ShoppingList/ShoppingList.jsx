@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import "./list.css"
 import Footer from '../../components/footer/Footer'
+import { Context } from "../../Context";
+
 
 export default function ShoppingList() {
+    const {theme, colors, setTheme  } = useContext(Context);
     const [isFetched, setIsFetched] = useState(false)
     const [list, setList] = useState([])
 
@@ -67,9 +70,8 @@ export default function ShoppingList() {
       
 
     }
-
     const handleChange = (e) => {
-        
+
         console.log(e)
         if(e.target.checked) {
         e.target.previousSibling.classList.add('crossed')
@@ -77,8 +79,17 @@ export default function ShoppingList() {
             e.target.previousSibling.classList.remove('crossed')
         }
     }
-
-
+  
+   
+    const handleChangeIt = (e) => {
+        if (!e.target.classList.contains('crossed')) {
+            e.target.classList.add('crossed')
+            e.target.nextSibling.checked = true 
+        } else if (e.target.classList.contains('crossed')) {
+            e.target.classList.remove('crossed')
+            e.target.nextSibling.checked = false
+        }
+    }
 
     let deleteOptions = {
         
@@ -96,23 +107,20 @@ export default function ShoppingList() {
         for (let things in list) {
             if (document.getElementById(list[things].id).classList.contains('crossed')){
                 let selected = list[things].id
-               
-                console.log(token)
-
                 let deleteBody = {
                     "id" : selected,
                 }
                
                 axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/delete/`, deleteBody,  deleteOptions)
-                .then(response => response.json())
-                .then(data => console.log(data))
                 .catch(error => console.log(error))
-
                 getData()
-               
+                getData()
+                document.querySelectorAll('input[type=checkbox').forEach(el => el.checked=false)
                
             }
         }
+
+       
        
     }
 
@@ -120,22 +128,24 @@ export default function ShoppingList() {
     return (
         <div id="container">
             <p>Shopping List</p>
-            <div id="list">
-                <ul>
-                    {list.map((item,) =>( 
-                    <div  className="item-cont">
-                    <li id={item.id} key={item.id}>{item.listItem}</li>
-                    <input id="checkbox" type="checkbox" onChange={handleChange}></input>
-                    </div>))}
-                </ul>
-            </div>
             <div id ="add-item">
                 <form id="form" onSubmit={handleSubmit}>
                 <input id="item-input" type="text" placeholder="Enter Item to add"></input>
-                <button type="submit" >Add</button>
+                <button id="add-btn" type="submit">Add</button>
                 </form>
             </div>
-            <button onClick={handleClear}>CLEAR SHOPPING LIST</button>
+            <div id="list">
+                <ul style={{"background-color":colors[theme].secondary }}>
+                    {list.map((item,) =>( 
+                    <div   className="item-cont">
+                    <li id={item.id} key={item.id} onClick={handleChangeIt}>{item.listItem} </li>
+                    <input id="checkbox" type="checkbox" onClick={handleChange} ></input>
+                    </div> 
+                    ))}
+                </ul>
+            </div>
+          
+            <button id="clear" onClick={handleClear}>Clear Items</button>
         </div>
     )
 }

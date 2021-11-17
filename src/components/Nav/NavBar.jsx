@@ -13,12 +13,12 @@ export default function NavBar() {
 
     const navigate = useNavigate();
 
-    const logout = (e) => {
-        e.preventDefault();
-        window.localStorage.removeItem("token");
-        setIsLoggedIn(false);
-        navigate("/");
-    }
+    // const logout = (e) => {
+    //     e.preventDefault();
+    //     window.localStorage.removeItem("token");
+    //     setIsLoggedIn(false);
+    //     navigate("/");
+    // }
 
     return (
         <Nav>
