@@ -23,7 +23,7 @@ export default function Footer() {
     
     const handleItem = () => {
         navigate('/home')   
-        setPage('/item')
+        setPage('/home')
     }
     const handleList = () => {
         navigate('/list')
@@ -52,7 +52,7 @@ export default function Footer() {
         <div>
             <footer className="footer" style={{"background-color":colors[theme].primary}}>
                 <div className="footerButtons">
-                <a  onClick={handleItem}>{<FaShoppingBasket className={page == '/item' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
+                <a  onClick={handleItem}>{<FaShoppingBasket className={page == '/home' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
                 <a   onClick={handleList}>{<FaEdit id="shopping-list-button" className={page == '/list' ? 'selected nav-btn': 'nav-btn'}/>}</a>
                 <Modal1 className="nav-btn" id="add-button" />
                 <a  onClick={handleProfile}><FaUserCircle id ="profile-button" className={page == '/profile' ? 'selected nav-btn': 'nav-btn'}/></a>
