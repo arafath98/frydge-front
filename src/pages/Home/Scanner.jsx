@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 import { useNavigate } from "react-router-dom";
+
+import { Context } from "../../Context";
 
 function Scanner() {
   const [data, setData] = React.useState({ text: "Scanning..." });
@@ -16,7 +18,9 @@ function Scanner() {
   const [check, setCheck] = React.useState(false)
   const [barcodeInputShow, setBarcodeInputShow] = React.useState({})
   const [pleaseInputBarcode, setPleaseInputBarcode] = React.useState(false)
-  const [barcodeNotFound,setBarcodeNotFound] = React.useState(false)
+  const [barcodeNotFound, setBarcodeNotFound] = React.useState(false)
+
+  const { setItemsData } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -108,11 +112,13 @@ function Scanner() {
     } else {
       fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
         .then(resp => resp.json())
-        .then(jsondata => {setFetched(jsondata.products[0])
+        .then(jsondata => {
+          setFetched(jsondata.products[0])
           setIsItem(true)
-          setBarcodeInputShow(true)})
+          setBarcodeInputShow(true)
+        })
         .catch(resp => setBarcodeNotFound(true))
-      
+
     }
   }
 
@@ -151,8 +157,13 @@ function Scanner() {
 
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`, options)
       .then(resp => resp.json())
-      .then(resp => console.log(resp))
-      .then(resp => setComplete(true))
+      // .then(resp => console.log(resp))
+      .then(resp => {
+        console.log(resp);
+        setComplete(true);
+        navigate("/");
+        navigate("/home");
+      })
 
   }, [item2])
 
