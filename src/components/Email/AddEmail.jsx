@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import InputBox from "../UI/InputBox";
 import Button from "../UI/Button";
 import { Context } from "../../Context";
+import './addemail.css'
 
 export default function AddEmail(props) {
 
@@ -99,8 +100,9 @@ export default function AddEmail(props) {
         setIsValidEmail(false);
     }
 
+
     return (
-        <Container>
+        <Container id="email-form-container">
             <Row className="justify-content-center">
                 <Col xs={10} sm={10} md={8} lg={7} xl={6}>
                     {!isValidEmail && <center><h3 style={{ color: "red" }}>Not a valid email</h3></center>}
@@ -124,7 +126,7 @@ export default function AddEmail(props) {
                     <Button background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={delEmail}>Delete Email</Button>
                 </Col>
             </Row>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar anchorOrigin={{ vertical: 'center', horizontal: 'center' }} open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert aria-label="popup" onClose={handleClose} severity={messageType} sx={{ width: '100%' }}>
                     {message}
                 </Alert>

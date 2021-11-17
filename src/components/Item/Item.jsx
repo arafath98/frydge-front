@@ -15,9 +15,6 @@ export default function Item(props) {
     const { theme, colors, setItemsData, itemsData } = useContext(Context);
 
     const deleteItemHandler = (id) => {
-        console.log("Clicked element with id " + id);
-        // const item = itemsData.filter(item => item.id === id);
-        // const itemName = item[0].name;
 
         const token = window.localStorage.getItem("token");
 
@@ -35,7 +32,6 @@ export default function Item(props) {
             .then(data => {
                 if (data.message === "Item not found.")
                     return
-                console.log(data);
                 setItemsData((previousData) => {
                     return previousData.filter(data => data.id !== id);
                 });
@@ -47,14 +43,15 @@ export default function Item(props) {
         <RoundedContainer background={colors[theme].secondary}>
             <Row className="justify-content-center">
                 <Col xs={4}>
-                    <h3>{props.name}</h3>
+                    
                     <Image src={props.image} />
                 </Col>
 
                 <Col xs={8}
                     className={styles.details}>
+                      
                     <Info
-                        barcode={props.barcode}
+                        name={props.name}
                         expiry={props.expiry}
                     />
 

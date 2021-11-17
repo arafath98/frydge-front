@@ -1,12 +1,90 @@
 .footer {
     position:fixed;
     bottom: 0;
-    left: 5px;
-    right: 5px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid grey;
+    background-color: rgb(243, 243, 243);
+    height: 60px;
 }
+
+#dropdown-basic-button {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+#dropdown-basic-button:focus {
+    outline: none;
+    box-shadow: none;
+    
+}
+
+.dropdown-menu {
+    width: 20%;
+}
+
+#logout {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+.selected {
+    color: rgb(51, 112, 224);
+}
+
 
 .footerButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -15px;
+}
+
+.nav-btn {
+    margin-top: 7.5px;
+    font-size: 35px;
+}
+
+.nav-btn:hover {
+    cursor: pointer;
+}
+
+#item-button {
+    margin-left: 12px;
+    
+}
+
+
+#settingsl, #settingsd {
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+#settingsl {
+    color: black;
+}
+
+#settingsd {
+    color: white;
+}
+
+#dm {
+    padding: 2px;
+}
+
+.p-3 {
+    margin:-20px;   
+}
+
+#so {
+    margin-left: 9px;
+    font-size: 20px;
+
+}
+
+@media only screen and (min-width: 768px){
+    .footerButtons {
+        justify-content: space-around;
+    }
 }

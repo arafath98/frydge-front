@@ -1,0 +1,46 @@
+#add-button {
+    margin-top: 3px;
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+#add-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#plus {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.plusl {
+    color: black;
+}
+
+.plusd {
+    color: white
+}
+
+#dm-label {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.mdl-dark .modal-content {
+    background-color: #343a40;
+    color: white;
+}
+
+.mdl-dark .btn-close {
+    background-color: #f8f9fa;
+}
+
+.mdl-dark p {
+    color: white;
+}
+
+.dark-calendar::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
