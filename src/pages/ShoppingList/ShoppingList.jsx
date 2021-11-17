@@ -56,8 +56,12 @@ export default function ShoppingList() {
         }
 
         axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`, body, options)
-        .then(response => { setList(prev => [...prev, response.data.item])
-        form.reset()})
+        
+        .then(response => { console.log('test ?') 
+        setList(prev => [...prev, response.data.item])
+        form.reset()
+        
+    })
 
        
       
@@ -92,12 +96,11 @@ export default function ShoppingList() {
         for (let things in list) {
             if (document.getElementById(list[things].id).classList.contains('crossed')){
                 let selected = list[things].id
-                let selectedItem = list[things].listItem
+               
                 console.log(token)
 
                 let deleteBody = {
                     "id" : selected,
-                    "item": selectedItem
                 }
                
                 axios.post(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/delete/`, deleteBody,  deleteOptions)
