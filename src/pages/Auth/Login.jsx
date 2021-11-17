@@ -55,9 +55,6 @@ export default function Login() {
     const login = (e) => {
         e.preventDefault();
 
-        console.log("username: " + username);
-        console.log("password: " + password);
-
         const data = { username, password }
 
         const options = {

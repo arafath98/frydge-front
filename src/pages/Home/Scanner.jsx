@@ -36,7 +36,6 @@ function Scanner() {
   useDidMountEffect(() => {
 
     let barcodeNo = data.text
-    console.log(barcodeNo)
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
       .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
@@ -49,7 +48,6 @@ function Scanner() {
 
 
   useDidMountEffect(() => {
-    console.log(fetched)
     setCheck(fetched)
     setItem1({ barcode: fetched.barcode_number, name: fetched.title, image: fetched.images[0] })
     setScanned(true)
@@ -59,7 +57,6 @@ function Scanner() {
     e.preventDefault()
     setShowDateInput(true)
     setCheck(false)
-    console.log(fetched)
   }
 
 
@@ -68,7 +65,6 @@ function Scanner() {
     // 
     setIsItem(false)
     setCheck(false)
-    console.log('denied!!!')
   }
 
   const manualShow = (e) => {
@@ -76,7 +72,6 @@ function Scanner() {
     let pressedBtn = e.target.value
     setScanned(true)
     setCheck(false)
-    console.log(pressedBtn)
     if (pressedBtn == 'Manually input name') {
       setIsItem(false)
     }
@@ -88,9 +83,6 @@ function Scanner() {
 
   }
 
-  useDidMountEffect(() => {
-    console.log(item1)
-  }, [item1])
 
   const manualSubmit = (e) => {
     e.preventDefault()
@@ -98,7 +90,6 @@ function Scanner() {
     setItem1({ barcode: 1, name, image: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg" })
     setShowDateInput(true)
     setIsItem(true)
-    console.log('here is submit')
 
   }
 
@@ -123,9 +114,6 @@ function Scanner() {
     }
   }
 
-  //   useDidMountEffect(() => {
-  //     setCheck(true)
-  // },[barcodeInputShow])
 
   const itemSubmission = (e) => {
     setNoDate(false)
@@ -134,7 +122,6 @@ function Scanner() {
     if (!date) {
       setNoDate(true)
     } else {
-      console.log(date)
 
       if (fetched) setIsItem(false)
       else (setIsItem(true))
@@ -147,7 +134,6 @@ function Scanner() {
   }
 
   useDidMountEffect(() => {
-    console.log(item2)
 
     const token = window.localStorage.getItem("token");
 
@@ -162,9 +148,7 @@ function Scanner() {
 
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`, options)
       .then(resp => resp.json())
-      // .then(resp => console.log(resp))
       .then(resp => {
-        console.log(resp);
         setComplete(true);
         navigate("/");
         navigate("/home");
