@@ -8,6 +8,7 @@ import dairy from "../../images/dairy.png"
 import misc from "../../images/misc.png"
 import fish from "../../images/fish.png"
 import { Modal, Button } from 'react-bootstrap';
+import { Alert, Snackbar } from "@mui/material"
 
 
 
@@ -16,8 +17,19 @@ export default function ShoppingList() {
     const [isFetched, setIsFetched] = useState(false)
     const [list, setList] = useState([])
     const [show, setShow] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [message, setmessage] = useState("")
+    const [messageType, setMessageType] = useState("")
 
-    const handleClose = () => setShow(false);
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        setOpen(false)
+    }
+
+    const handleCloseModal = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
@@ -75,33 +87,20 @@ export default function ShoppingList() {
                 
                 setList(prev => [...prev, response.data.item])
                 form.reset()
-
+                setOpen(true)
+                setMessageType("success")
+                setmessage("Item added!")
             })
+            
+        
+       
+
 
 
 
 
     }
-    // const handleChange = (e) => {
-
-    //     console.log(e)
-    //     if (e.target.checked) {
-    //         e.target.previousSibling.classList.add('crossed')
-    //     } else if (!e.target.checked) {
-    //         e.target.previousSibling.classList.remove('crossed')
-    //     }
-    // }
-
-
-    // const handleChangeIt = (e) => {
-    //     if (!e.target.classList.contains('crossed')) {
-    //         e.target.classList.add('crossed')
-    //         e.target.nextSibling.checked = true
-    //     } else if (e.target.classList.contains('crossed')) {
-    //         e.target.classList.remove('crossed')
-    //         e.target.nextSibling.checked = false
-    //     }
-    // }
+  
 
     let deleteOptions = {
 
@@ -137,6 +136,9 @@ export default function ShoppingList() {
         }
 
         document.querySelectorAll('input[type=checkbox').forEach(el => el.checked = false)
+        setOpen(true)
+                setMessageType("success")
+                setmessage("Item(s) cleared!")
 
     }
 
@@ -176,7 +178,7 @@ export default function ShoppingList() {
             </div>
             </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>
                 </Modal.Footer>
@@ -198,6 +200,11 @@ export default function ShoppingList() {
                     ))}
                 </ul>
             </div>
+            <Snackbar anchorOrigin={{ vertical: 'center', horizontal: 'center' }} open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert aria-label="popup" onClose={handleClose} severity={messageType} sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
 
            
         </div>
