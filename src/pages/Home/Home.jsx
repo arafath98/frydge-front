@@ -56,7 +56,7 @@ export default function Home() {
     useEffect(() => {
         const f = itemsData.filter(item => item.name.toLowerCase().includes(searchInput) ? true : false)
         setFilteredItems(f);
-    }, [searchInput])
+    }, [searchInput, itemsData]);
 
     const getExpiryDays = (expiry) => {
         if (expiry === 0)

@@ -19,7 +19,7 @@ const Modal1 = () => {
 
             </div>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal className={theme == 'dark' ? "mdl-dark" : ""} show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <div className="text-center">
                         <Modal.Title>Scan Barcode Below</Modal.Title>

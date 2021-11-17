@@ -4,6 +4,7 @@ import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 import { useNavigate } from "react-router-dom";
 
 import { Context } from "../../Context";
+import InputBox from "../../components/UI/InputBox";
 
 function Scanner() {
   const [data, setData] = React.useState({ text: "Scanning..." });
@@ -20,7 +21,7 @@ function Scanner() {
   const [pleaseInputBarcode, setPleaseInputBarcode] = React.useState(false)
   const [barcodeNotFound, setBarcodeNotFound] = React.useState(false)
 
-  const { setItemsData } = useContext(Context);
+  const { setItemsData, theme, colors } = useContext(Context);
 
   const [noDate, setNoDate] = React.useState(false)
   const navigate = useNavigate();
@@ -169,7 +170,7 @@ function Scanner() {
             delay={100}
           />
           <div className='text-center'>
-            <p className="text-dark display-4">{data.text}</p>
+            <p className={`text-${theme == "dark" ? 'light' : "dark"} display-4`}>{data.text}</p>
             <div className='d-flex flex-column'>
 
               <input type='button' data-toggle="button" aria-pressed="false" autoComplete="off" className='btn btn-primary my-3' value='Manually input barcode' onClick={manualShow} />
@@ -182,17 +183,32 @@ function Scanner() {
         </>
 
       }
-      {isItem ? <></> : <><form onSubmit={manualSubmit} id="form">
-        <label className='mx-2'>Item name:</label>
-        <input id='textbox' type='text' />
-        <input type="submit" className='mx-1 btn btn-primary' />
+      {isItem ? <></> : <><form style={{ padding: "10px" }} onSubmit={manualSubmit} id="form">
+        <label>Item name:</label>
+        <InputBox
+          id='textbox'
+          placeholder="Name.."
+          type="text"
+          background={colors[theme].secondary}
+          backgroundFocused={colors[theme].secondaryHover}
+          color={colors[theme].text}
+        />
+        <input type="submit" className='btn btn-primary' />
       </form></>
 
       }
-      {barcodeInputShow ? <></> : <><form onSubmit={manualBarcodeSubmit} id="form">
-        <label className='mx-2'>Barcode No:</label>
-        <input id='barcodebox' type='text' />
-        <input type="submit" className='mx-1 btn btn-primary' />
+      {barcodeInputShow ? <></> : <><form style={{ padding: "10px" }} onSubmit={manualBarcodeSubmit} id="form">
+        <label>Barcode No:</label>
+
+        <InputBox
+          id='barcodebox'
+          placeholder="Barcode no.."
+          type="text"
+          background={colors[theme].secondary}
+          backgroundFocused={colors[theme].secondaryHover}
+          color={colors[theme].text}
+        />
+        <input type="submit" className='btn btn-primary' />
       </form></>
 
 
@@ -219,14 +235,28 @@ function Scanner() {
       {
         showDateInput ?
           <>
-            <p className="text-dark display-4">Please enter the item's expiry date</p>
+            <p className={`text-${theme === 'dark' ? "light" : "dark"} display-4`}>Please enter the item's expiry date</p>
             <form onSubmit={itemSubmission}>
-              <input id="date" type='date' />
-              <input type="submit" />
+              <InputBox
+                className={theme === 'dark' && "dark-calendar"}
+                id='date'
+                type="date"
+                background={colors[theme].secondary}
+                backgroundFocused={colors[theme].secondaryHover}
+                color={colors[theme].text}
+              />
+
+              <InputBox
+                type="submit"
+                background={colors[theme].contrast}
+                color={colors[theme].contrastTextColor}
+              />
+
+              {/* <input type="submit" /> */}
             </form>
           </> : <></>
       }
-      {noDate ? <><p className='text-center my-5'>Please enter a date</p></>:<></>
+      {noDate ? <><p className='text-center my-5'>Please enter a date</p></> : <></>
       }
       {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
     </>
