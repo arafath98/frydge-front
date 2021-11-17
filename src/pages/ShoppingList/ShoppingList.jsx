@@ -29,8 +29,6 @@ export default function ShoppingList() {
             "token": token,
             // "origin": 'https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/'
         }
-
-
     }
 
 
@@ -40,7 +38,6 @@ export default function ShoppingList() {
         console.log(token)
         let results = await axios(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/users/list/`, options)
         let data = results.data.data
-        console.log(data)
         let shoppingList = []
         for (let item in data) {
 
@@ -114,7 +111,8 @@ export default function ShoppingList() {
 
         }
 
-    }
+        }
+    
 
 
     const handleClear = (e) => {
@@ -143,7 +141,7 @@ export default function ShoppingList() {
 
     return (
         <div id="container">
-            <h3>Shopping List</h3>
+            <h3 id="#h3">Shopping List</h3>
             <div id="addNclear">
             <Button id="add-new" onClick={handleShow}>
                 Add New Item
@@ -188,12 +186,12 @@ export default function ShoppingList() {
                     {list.map((item,) => (
                         <>
                             <div className="item-cont">
-                                <img src={item.type == 'meat' ? meat : item.type == 'produce' ? veg : item.type == "dairy" ? dairy : item.type == "seafood" ? fish : item.type == "other" ? misc : null} />
+                                <img id ="#img" src={item.type == 'meat' ? meat : item.type == 'produce' ? veg : item.type == "dairy" ? dairy : item.type == "seafood" ? fish : item.type == "other" ? misc : null} />
                                 <li  key={item.id} >{item.listItem} </li>
                                 <p>{item.quantity}</p>
                                 <input id={item.id} type="checkbox"  ></input>
                             </div>
-                            <hr id="break" />
+                            <hr id="hr" />
                         </>
                     ))}
                 </ul>

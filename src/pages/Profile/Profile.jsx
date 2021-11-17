@@ -18,7 +18,6 @@ export default function Profile() {
 
     const addEmail = (email) => {
         console.log(`${email} has been successfully added.`);
-        // API CALL TO SEND EMAILS
     };
 
     return (

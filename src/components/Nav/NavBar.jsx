@@ -23,7 +23,7 @@ export default function NavBar() {
     return (
         <Nav>
             <Container className={styles.container}>
-                <img style={{height:'50px'}} src="./smart.png" alt="" />
+                <img style={{ height: '50px' }} src="./smart.png" alt="" />
                 <div className={styles.title}>Frydge</div>
 
                 <div className={styles.links}>
@@ -32,21 +32,7 @@ export default function NavBar() {
                             <Link to="/login">Login</Link>
                             <Link to="/register">Register</Link>
                         </>
-                    } 
-{/* 
-                    {isLoggedIn && <Darkmode/>
-                    
-          
-        
-          } */}
-
-                    {/* {
-                        isLoggedIn && <>
-                            <Link to="/home">Home</Link>
-                            <Link to="/profile">Profile</Link>
-                            <Link to="/" onClick={logout}>Logout</Link>
-                        </>
-                    } */}
+                    }
                 </div>
             </Container>
         </Nav>

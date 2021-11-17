@@ -4,6 +4,7 @@ import useDidMountEffect from "../../components/UI/customhooks/usedidmount";
 import { useNavigate } from "react-router-dom";
 
 import { Context } from "../../Context";
+import InputBox from "../../components/UI/InputBox";
 
 function Scanner() {
   const [data, setData] = React.useState({ text: "Scanning..." });
@@ -20,7 +21,7 @@ function Scanner() {
   const [pleaseInputBarcode, setPleaseInputBarcode] = React.useState(false)
   const [barcodeNotFound, setBarcodeNotFound] = React.useState(false)
 
-  const { setItemsData } = useContext(Context);
+  const { setItemsData, theme, colors } = useContext(Context);
 
   const [noDate, setNoDate] = React.useState(false)
   const navigate = useNavigate();
@@ -36,7 +37,6 @@ function Scanner() {
   useDidMountEffect(() => {
 
     let barcodeNo = data.text
-    console.log(barcodeNo)
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
       .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
@@ -49,7 +49,6 @@ function Scanner() {
 
 
   useDidMountEffect(() => {
-    console.log(fetched)
     setCheck(fetched)
     setItem1({ barcode: fetched.barcode_number, name: fetched.title, image: fetched.images[0] })
     setScanned(true)
@@ -59,7 +58,6 @@ function Scanner() {
     e.preventDefault()
     setShowDateInput(true)
     setCheck(false)
-    console.log(fetched)
   }
 
 
@@ -68,7 +66,6 @@ function Scanner() {
     // 
     setIsItem(false)
     setCheck(false)
-    console.log('denied!!!')
   }
 
   const manualShow = (e) => {
@@ -76,7 +73,6 @@ function Scanner() {
     let pressedBtn = e.target.value
     setScanned(true)
     setCheck(false)
-    console.log(pressedBtn)
     if (pressedBtn == 'Manually input name') {
       setIsItem(false)
     }
@@ -88,9 +84,6 @@ function Scanner() {
 
   }
 
-  useDidMountEffect(() => {
-    console.log(item1)
-  }, [item1])
 
   const manualSubmit = (e) => {
     e.preventDefault()
@@ -98,7 +91,6 @@ function Scanner() {
     setItem1({ barcode: 1, name, image: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg" })
     setShowDateInput(true)
     setIsItem(true)
-    console.log('here is submit')
 
   }
 
@@ -123,9 +115,6 @@ function Scanner() {
     }
   }
 
-  //   useDidMountEffect(() => {
-  //     setCheck(true)
-  // },[barcodeInputShow])
 
   const itemSubmission = (e) => {
     setNoDate(false)
@@ -134,7 +123,6 @@ function Scanner() {
     if (!date) {
       setNoDate(true)
     } else {
-      console.log(date)
 
       if (fetched) setIsItem(false)
       else (setIsItem(true))
@@ -147,7 +135,6 @@ function Scanner() {
   }
 
   useDidMountEffect(() => {
-    console.log(item2)
 
     const token = window.localStorage.getItem("token");
 
@@ -162,9 +149,7 @@ function Scanner() {
 
     fetch(`https://sleepy-sierra-88173.herokuapp.com/https://frydgeapp.herokuapp.com/items/create/`, options)
       .then(resp => resp.json())
-      // .then(resp => console.log(resp))
       .then(resp => {
-        console.log(resp);
         setComplete(true);
         navigate("/");
         navigate("/home");
@@ -185,7 +170,7 @@ function Scanner() {
             delay={100}
           />
           <div className='text-center'>
-            <p className="text-dark display-4">{data.text}</p>
+            <p className={`text-${theme == "dark" ? 'light' : "dark"} display-4`}>{data.text}</p>
             <div className='d-flex flex-column'>
 
               <input type='button' data-toggle="button" aria-pressed="false" autoComplete="off" className='btn btn-primary my-3' value='Manually input barcode' onClick={manualShow} />
@@ -198,17 +183,32 @@ function Scanner() {
         </>
 
       }
-      {isItem ? <></> : <><form onSubmit={manualSubmit} id="form">
-        <label className='mx-2'>Item name:</label>
-        <input id='textbox' type='text' />
-        <input type="submit" className='mx-1 btn btn-primary' />
+      {isItem ? <></> : <><form style={{ padding: "10px" }} onSubmit={manualSubmit} id="form">
+        <label>Item name:</label>
+        <InputBox
+          id='textbox'
+          placeholder="Name.."
+          type="text"
+          background={colors[theme].secondary}
+          backgroundFocused={colors[theme].secondaryHover}
+          color={colors[theme].text}
+        />
+        <input type="submit" className='btn btn-primary' />
       </form></>
 
       }
-      {barcodeInputShow ? <></> : <><form onSubmit={manualBarcodeSubmit} id="form">
-        <label className='mx-2'>Barcode No:</label>
-        <input id='barcodebox' type='text' />
-        <input type="submit" className='mx-1 btn btn-primary' />
+      {barcodeInputShow ? <></> : <><form style={{ padding: "10px" }} onSubmit={manualBarcodeSubmit} id="form">
+        <label>Barcode No:</label>
+
+        <InputBox
+          id='barcodebox'
+          placeholder="Barcode no.."
+          type="text"
+          background={colors[theme].secondary}
+          backgroundFocused={colors[theme].secondaryHover}
+          color={colors[theme].text}
+        />
+        <input type="submit" className='btn btn-primary' />
       </form></>
 
 
@@ -235,14 +235,28 @@ function Scanner() {
       {
         showDateInput ?
           <>
-            <p className="text-dark display-2">Please enter the item's expiry date</p>
+            <p className={`text-${theme === 'dark' ? "light" : "dark"} display-4`}>Please enter the item's expiry date</p>
             <form onSubmit={itemSubmission}>
-              <input id="date" type='date' />
-              <input type="submit" />
+              <InputBox
+                className={theme === 'dark' && "dark-calendar"}
+                id='date'
+                type="date"
+                background={colors[theme].secondary}
+                backgroundFocused={colors[theme].secondaryHover}
+                color={colors[theme].text}
+              />
+
+              <InputBox
+                type="submit"
+                background={colors[theme].contrast}
+                color={colors[theme].contrastTextColor}
+              />
+
+              {/* <input type="submit" /> */}
             </form>
           </> : <></>
       }
-      {noDate ? <><p className='text-center'>Please enter a date</p></> : <></>
+      {noDate ? <><p className='text-center my-5'>Please enter a date</p></> : <></>
       }
       {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
     </>

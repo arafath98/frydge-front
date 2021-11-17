@@ -1,26 +1,24 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import "./Footer.css"
 import { useNavigate } from "react-router-dom"
 import Modal1 from '../../pages/Home/Modal1'
-import {DropdownButton, Dropdown} from 'react-bootstrap'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { Context } from "../../Context";
 import Darkmode from '../../pages/Home/Darkmode'
-import {FaShoppingBasket,FaEdit,FaUserCircle, FaCog,FaSignOutAlt } from "react-icons/fa";
+import { FaShoppingBasket, FaEdit, FaUserCircle, FaCog, FaSignOutAlt } from "react-icons/fa";
 
 export default function Footer() {
-    const { isLoggedIn, setIsLoggedIn, theme, colors, setTheme  } = useContext(Context);
+    const { isLoggedIn, setIsLoggedIn, theme, colors, setTheme } = useContext(Context);
     const [check, setCheck] = useState(false)
     const [page, setPage] = useState('')
 
-    useEffect(()=> {
-        console.log(window.location.pathname);
+    useEffect(() => {
         setPage(window.location.pathname)
-        console.log(page);
-    },[])
-  
+    }, [])
+
 
     const navigate = useNavigate()
-    
+
     const handleItem = () => {
         navigate('/home')   
         setPage('/home')
@@ -40,17 +38,17 @@ export default function Footer() {
         navigate("/");
     }
     const handleClick = () => {
-        theme == 'dark' ? setCheck(true): setCheck(false)
-        
+        theme == 'dark' ? setCheck(true) : setCheck(false)
+
     }
 
     const handleDm = () => {
-        theme == 'light' ? setTheme('dark'): setTheme('light')
+        theme == 'light' ? setTheme('dark') : setTheme('light')
     }
 
     return (
         <div>
-            <footer className="footer" style={{"background-color":colors[theme].primary}}>
+            <footer className="footer" style={{ "background-color": colors[theme].primary }}>
                 <div className="footerButtons">
                 <a  onClick={handleItem}>{<FaShoppingBasket className={page == '/home' ? 'selected nav-btn': 'nav-btn'}id="item-button" />}</a>
                 <a   onClick={handleList}>{<FaEdit id="shopping-list-button" className={page == '/list' ? 'selected nav-btn': 'nav-btn'}/>}</a>
@@ -63,7 +61,7 @@ export default function Footer() {
                 </DropdownButton>
                 </div>
             </footer>
-            
+
         </div>
     )
 }
