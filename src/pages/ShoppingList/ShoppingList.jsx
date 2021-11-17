@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import "./list.css"
+import "./checkbox.css"
 import { Context } from "../../Context";
 import meat from "../../images/meat.png"
 import veg from "../../images/veg.png"
@@ -191,9 +192,17 @@ export default function ShoppingList() {
                         <>
                             <div className="item-cont">
                                 <img id="icon" src={item.type == 'meat' ? meat : item.type == 'produce' ? veg : item.type == "dairy" ? dairy : item.type == "seafood" ? fish : item.type == "other" ? misc : null} />
-                                <li key={item.id} >{item.listItem} </li>
-                                <p>{item.quantity}</p>
-                                <input id={item.id} type="checkbox"  ></input>
+                                <li id="sl-item" key={item.id} >{item.listItem} </li>
+                                <p id="quan">{item.quantity}</p>
+                                    <label className="label">
+                                    <input id={item.id} className="label__checkbox" type="checkbox" />
+                                    <span className="label__text">
+                                        <span className="label__check">
+                                            <i className="fa fa-check icon"></i>
+                                        </span>
+                                    </span>
+                                </label>
+
                             </div>
                             <hr id="hr" />
                         </>

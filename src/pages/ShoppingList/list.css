@@ -114,6 +114,7 @@ ul {
     padding: 5px;
     box-shadow: 0 2px rgb(145, 172, 189);
     transition: 0.3s;
+    font-size: 20px;
 }
 
 #clear:hover {
@@ -127,4 +128,14 @@ ul {
     justify-content: space-between;
     width: 75%;
     margin-top: 20px;
+}
+
+#quan {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#sl-item {
+    font-size: 20px;
+    font-style: 700;
 }
