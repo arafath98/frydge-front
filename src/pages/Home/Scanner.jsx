@@ -252,7 +252,6 @@ function Scanner() {
                 color={colors[theme].contrastTextColor}
               />
 
-              {/* <input type="submit" /> */}
             </form>
           </> : <></>
       }

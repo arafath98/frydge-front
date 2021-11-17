@@ -6,9 +6,15 @@
 }
 
 .title {
-    font-size:60px;
+    font-size: 45px;
     font-weight: 700;
     margin-left: -50px;
+}
+
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 30px;
+    }
 }
 
 .links {
