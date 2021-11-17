@@ -7,17 +7,17 @@ const Modal1 = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const { theme, colors, setTheme  } = useContext(Context);
+    const { theme, colors, setTheme } = useContext(Context);
 
     return (
         <>
-        <div className='text-center'>
+            <div className='text-center'>
 
-            <Button id="add-button" variant="primary" onClick={handleShow}>
-                <span id="plus" className={theme=='light' ? 'plusl': 'plusd'}>+</span>
-            </Button>
+                <Button id="add-button" variant="primary" onClick={handleShow}>
+                    <span id="plus" className={theme == 'light' ? 'plusl' : 'plusd'}>+</span>
+                </Button>
 
-        </div>
+            </div>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -32,9 +32,6 @@ const Modal1 = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    {/* <Button variant="primary" onClick={handleClose}>
-                        Get Data
-                    </Button> */}
                 </Modal.Footer>
             </Modal>
         </>)
