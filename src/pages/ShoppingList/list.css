@@ -12,13 +12,16 @@
     display: flex;
     justify-content: space-between;
     width: 250px;
-    background-color: blueviolet;
+    
 }
 
 ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: violet;
+    border: 1px solid black;
+    border-radius: 10px;
 
     
 }

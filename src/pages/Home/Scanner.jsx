@@ -22,6 +22,7 @@ function Scanner() {
 
   const { setItemsData } = useContext(Context);
 
+  const [noDate, setNoDate] = React.useState(false)
   const navigate = useNavigate();
 
 
@@ -36,7 +37,7 @@ function Scanner() {
 
     let barcodeNo = data.text
     console.log(barcodeNo)
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
       .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
       .catch(resp => console.log('fetch failed'))
@@ -110,7 +111,7 @@ function Scanner() {
     if (!barcodeNo || regExp.test(barcodeNo)) {
       setPleaseInputBarcode(true)
     } else {
-      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
+      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
         .then(resp => resp.json())
         .then(jsondata => {
           setFetched(jsondata.products[0])
@@ -127,18 +128,22 @@ function Scanner() {
   // },[barcodeInputShow])
 
   const itemSubmission = (e) => {
+    setNoDate(false)
     e.preventDefault()
     let date = document.getElementById('date').value
-    console.log(date)
+    if (!date) {
+      setNoDate(true)
+    } else {
+      console.log(date)
 
-    if (fetched) setIsItem(false)
-    else (setIsItem(true))
+      if (fetched) setIsItem(false)
+      else (setIsItem(true))
 
-    setDate(date)
-    setShowDateInput(false)
-    setIsItem(true)
-    setItem2({ ...item1, expiry: date })
-
+      setDate(date)
+      setShowDateInput(false)
+      setIsItem(true)
+      setItem2({ ...item1, expiry: date })
+    }
   }
 
   useDidMountEffect(() => {
@@ -236,6 +241,8 @@ function Scanner() {
               <input type="submit" />
             </form>
           </> : <></>
+      }
+      {noDate ? <><p className='text-center'>Please enter a date</p></> : <></>
       }
       {complete ? <> <h1>Item added! Close to view your items</h1> </> : <></>}
     </>

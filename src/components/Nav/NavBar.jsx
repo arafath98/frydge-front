@@ -23,6 +23,7 @@ export default function NavBar() {
     return (
         <Nav>
             <Container className={styles.container}>
+                <img style={{height:'50px'}} src="./smart.png" alt="" />
                 <div className={styles.title}>Frydge</div>
 
                 <div className={styles.links}>

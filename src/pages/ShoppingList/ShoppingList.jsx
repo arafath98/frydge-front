@@ -68,17 +68,18 @@ export default function ShoppingList() {
 
     }
 
-    const handleChange = (e) => {
-        
-        console.log(e)
-        if(e.target.checked) {
-        e.target.previousSibling.classList.add('crossed')
-        } else if (!e.target.checked) {
-            e.target.previousSibling.classList.remove('crossed')
-        }
+  
+    const handleChangeLi = (e) => {
+    
+         if(!e.target.childNodes[0].classList.contains('crossed')) {
+            e.target.childNodes[0].classList.add('crossed')
+            e.target.childNodes[1].checked = true
+         } else if (e.target.childNodes[0].classList.contains('crossed')) {
+             e.target.childNodes[0].classList.remove('crossed')
+             e.target.childNodes[1].checked = false
+             console.log('this happened');
+         }
     }
-
-
 
     let deleteOptions = {
         
@@ -123,9 +124,9 @@ export default function ShoppingList() {
             <div id="list">
                 <ul>
                     {list.map((item,) =>( 
-                    <div  className="item-cont">
-                    <li id={item.id} key={item.id}>{item.listItem}</li>
-                    <input id="checkbox" type="checkbox" onChange={handleChange}></input>
+                    <div  onClick={handleChangeLi} className="item-cont">
+                    <li id={item.id} key={item.id} >{item.listItem} </li>
+                    <input id="checkbox" type="checkbox" ></input>
                     </div>))}
                 </ul>
             </div>
