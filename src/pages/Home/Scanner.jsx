@@ -15,6 +15,8 @@ function Scanner() {
   const [item2, setItem2] = React.useState({})
   const [check, setCheck] = React.useState(false)
   const [barcodeInputShow, setBarcodeInputShow] = React.useState({})
+  const [pleaseInputBarcode, setPleaseInputBarcode] = React.useState(false)
+  const [barcodeNotFound,setBarcodeNotFound] = React.useState(false)
 
   const navigate = useNavigate();
 
@@ -97,16 +99,21 @@ function Scanner() {
 
   const manualBarcodeSubmit = (e) => {
     e.preventDefault()
+    setPleaseInputBarcode(false)
+    setBarcodeNotFound(false)
     let barcodeNo = document.getElementById('barcodebox').value
-    console.log(barcodeNo)
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
-      .then(resp => resp.json())
-      .then(jsondata => setFetched(jsondata.products[0]))
-    setIsItem(true)
-
-    setBarcodeInputShow(true)
-    console.log('here is submit')
-
+    let regExp = /[a-zA-Z]/g; // checks for a letter,  if there is, returns a letter, if not returns false
+    if (!barcodeNo || regExp.test(barcodeNo)) {
+      setPleaseInputBarcode(true)
+    } else {
+      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=2vd79xb8zc3ika62d6qvnbfsqonwm2`)
+        .then(resp => resp.json())
+        .then(jsondata => {setFetched(jsondata.products[0])
+          setIsItem(true)
+          setBarcodeInputShow(true)})
+        .catch(resp => setBarcodeNotFound(true))
+      
+    }
   }
 
   //   useDidMountEffect(() => {
@@ -187,20 +194,26 @@ function Scanner() {
         <input id='barcodebox' type='text' />
         <input type="submit" className='mx-1 btn btn-primary' />
       </form></>
+
+
+
+
       }
-        {check ? <>
-        
-        <div className="jumbotron text-center">
-        <h1 className="display-6">We found an item! <br/><hr/> {fetched.title}</h1>
+      {pleaseInputBarcode ? <><p className='text-center'>Please input a valid barcode number</p></> : <></>}
+      {barcodeNotFound ? <><p className='text-center'>We couldn't find your barcode. Add item manually by name instead</p></> : <></>}
+      {check ? <>
+
+        <div className="jumbotron ">
+          <h1 className="display-6">We found an item! <br /><hr /> {fetched.title}</h1>
 
         </div>
         <div className="d-flex flex-row justify-content-center">
 
-        <button className="btn btn-primary mx-4" onClick={confirmedItem}>Yes</button>
-        <button className="btn btn-danger mx-4" onClick={deniedItem}>No</button> 
+          <button className="btn btn-primary mx-4" onClick={confirmedItem}>Yes</button>
+          <button className="btn btn-danger mx-4" onClick={deniedItem}>No</button>
 
         </div>
-        </>
+      </>
         : <></>
       }
       {

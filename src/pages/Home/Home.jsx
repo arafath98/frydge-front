@@ -33,7 +33,6 @@ export default function Home() {
             .then(data => {
                 setItemsData(data.data.map((item) => {
                     const date = item["expiry"].split("-")
-                    // console.log(date)
                     const date1 = new Date(`${date[1]}/${date[2]}/${date[0]}`)
                     const date2 = new Date()
                     const diffTime = date1 - date2;
