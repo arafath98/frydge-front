@@ -11,7 +11,7 @@
 .item-cont {
     display: flex;
     justify-content: space-between;
-    width: 250%;
+    width: 275%;
     
 }
 
@@ -32,11 +32,11 @@ ul {
     border: 0;
     clear:both;
     display:block;
-    width: 250%;               
+    width: 275%;               
     height: 1px;
   }
 
-#img {
+#icon {
     width:27px;
     height: 30px;
 }

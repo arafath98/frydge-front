@@ -186,7 +186,7 @@ export default function ShoppingList() {
                     {list.map((item,) => (
                         <>
                             <div className="item-cont">
-                                <img id ="#img" src={item.type == 'meat' ? meat : item.type == 'produce' ? veg : item.type == "dairy" ? dairy : item.type == "seafood" ? fish : item.type == "other" ? misc : null} />
+                                <img id ="icon" src={item.type == 'meat' ? meat : item.type == 'produce' ? veg : item.type == "dairy" ? dairy : item.type == "seafood" ? fish : item.type == "other" ? misc : null} />
                                 <li  key={item.id} >{item.listItem} </li>
                                 <p>{item.quantity}</p>
                                 <input id={item.id} type="checkbox"  ></input>
