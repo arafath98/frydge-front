@@ -43,14 +43,15 @@ export default function Item(props) {
         <RoundedContainer background={colors[theme].secondary}>
             <Row className="justify-content-center">
                 <Col xs={4}>
-                    <h3>{props.name}</h3>
+                    
                     <Image src={props.image} />
                 </Col>
 
                 <Col xs={8}
                     className={styles.details}>
+                      
                     <Info
-                        barcode={props.barcode}
+                        name={props.name}
                         expiry={props.expiry}
                     />
 

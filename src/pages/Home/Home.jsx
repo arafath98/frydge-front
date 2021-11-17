@@ -89,7 +89,9 @@ export default function Home() {
         if (!filteredItems.length > 0)
             return <center style={{ color: 'red' }}><h3>NO ITEMS</h3></center>
 
-        return filteredItems.map((item) => <><Item
+        return filteredItems.map((item) => 
+        <>
+        <Item
             key={item.id}
             id={item.id}
             name={item.name}

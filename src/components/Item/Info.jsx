@@ -1,11 +1,12 @@
 import styles from "./Item.module.css";
 
+
 export default function Info(props) {
     return (
         <>
-            <div className={styles.info}>
-                <h5>No: {props.barcode}</h5>
-                <h3>Expiry: {props.expiry}</h3>
+            <div id="name-margin" className={styles.info}>
+                <h5 className={styles["item-name"]}> {props.name}</h5>
+                <h5>Expiry: {props.expiry}</h5>
             </div>
         </>
     );

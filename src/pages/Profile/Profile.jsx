@@ -22,7 +22,7 @@ export default function Profile() {
 
     return (
         <div>
-            <AddEmail addEmail={addEmail} />
+            <AddEmail className="email-form" addEmail={addEmail} />
         </div>
     );
 };
