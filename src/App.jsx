@@ -46,6 +46,8 @@ function App() {
       contrast: "#2d88ff",
       contrastHover: "#4e9afd",
 
+      contrastLight: "#2d88ff65",
+
       text: "white",
       contrastTextColor: "white"
     }
@@ -57,6 +59,8 @@ function App() {
 
       contrast: "#2d88ff",
       contrastHover: "#4e9afd",
+
+      contrastLight: "#727171",
 
       text: "black",
       contrastTextColor: "white"
