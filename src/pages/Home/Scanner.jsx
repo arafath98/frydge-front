@@ -37,7 +37,7 @@ function Scanner() {
   useDidMountEffect(() => {
 
     let barcodeNo = data.text
-    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
+    fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=nuohcu6kg6lpw3c9mfum4aa34w57j7`)
       .then(resp => resp.json())
       .then(jsondata => setFetched(jsondata.products[0]))
       .catch(resp => console.log('fetch failed'))
@@ -103,7 +103,7 @@ function Scanner() {
     if (!barcodeNo || regExp.test(barcodeNo)) {
       setPleaseInputBarcode(true)
     } else {
-      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=a6tvyxuqia7vosai7aidpph8jyw67r`)
+      fetch(`https://sleepy-sierra-88173.herokuapp.com/https://api.barcodelookup.com/v3/products?barcode=${barcodeNo}&formatted=y&key=nuohcu6kg6lpw3c9mfum4aa34w57j7`)
         .then(resp => resp.json())
         .then(jsondata => {
           setFetched(jsondata.products[0])
