@@ -132,6 +132,15 @@ export default function Register() {
                                 <Button className={styles.button} background={colors[theme].contrast} color={colors[theme].contrastTextColor} onClick={register}>Register</Button>
                             </Col>
                         </Row>
+
+                        <Row className="justify-content-center mt-2">
+                            <Col xs={10} sm={10} md={8} lg={7} xl={6}>
+                                <div>
+                                    <span>Already registered? </span>
+                                    <a style={{ color: colors[theme].contrast, cursor: "pointer" }} onClick={() => navigate("/login")}>Login</a>
+                                </div>
+                            </Col>
+                        </Row>
                     </form>
                 </Container>
             }
